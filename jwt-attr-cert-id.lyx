@@ -1757,19 +1757,19 @@ attribute_certs
 
  claim in the assertion (that is, an array of strings where each value is
  a JWT attribute certificate).
- This ensures that chosen set is authenticated in the user's private key.
+ This ensures that chosen set is authenticated by the user's private key.
 \end_layout
 
 \begin_layout Standard
-The primary JWT is the user's certificate issued by their identity provider
+The primary JWT is the certificate issued by the user's identity provider
  (IdP).
 \end_layout
 
 \begin_layout Standard
 The UA SHOULD only present attribute certificates when the relying party
- (RP) has indicated its desire for specific scopes.
- The UA MUST prompt the user for each disclosable scope before including
- the corresponding attribute certificate in the presented assertion.
+ (RP) has indicated its desire for specific scopes, and the user has explicitly
+ authorized disclosure of the attribute certificate corresponding to those
+ scopes.
 \end_layout
 
 \end_body
