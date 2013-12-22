@@ -1,0 +1,1776 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass docbook
+\use_default_options true
+\maintain_unincluded_children false
+\begin_local_layout
+Format 31
+
+InsetLayout Flex:PI_Strict
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_Strict
+End
+
+InsetLayout Flex:PI
+    LyXType Custom
+    HTMLTag div
+    LabelString PI
+End
+
+InsetLayout Flex:PI_SymRefs
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_SymRefs
+End
+
+InsetLayout Flex:PI_SortRefs
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_SortRefs
+End
+
+InsetLayout Flex:PI_TOC
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_TOC
+End
+
+InsetLayout Flex:PI_TOCIndent
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_TOCIndent
+End
+
+InsetLayout Flex:PI_TOCDepth
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_TOCDepth
+End
+
+InsetLayout Flex:PI_TOCNarrow
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_TOCNarrow
+End
+
+InsetLayout Flex:PI_TOCCompact
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_TOCCompact
+End
+
+InsetLayout Flex:PI_TOCAppendix
+    LyXType Custom
+    HTMLTag div
+    LabelString PI_TOCAppendix
+End
+
+InsetLayout Flex:DocName
+    LyXType Custom
+    HTMLTag div
+    LabelString DocName
+End
+
+InsetLayout Flex:IntendedStatus
+    LyXType Custom
+    HTMLTag div
+    LabelString IntendedStatus
+End
+
+InsetLayout Flex:Updates
+    LyXType Custom
+    HTMLTag div
+    LabelString Updates
+End
+
+InsetLayout Flex:Obsoletes
+    LyXType Custom
+    HTMLTag div
+    LabelString Obsoletes
+End
+
+InsetLayout Flex:SeriesNo
+    LyXType Custom
+    HTMLTag div
+    LabelString SeriesNo
+End
+
+InsetLayout Flex:RFCNumber
+    LyXType Custom
+    HTMLTag div
+    LabelString RFCNumber
+End
+
+InsetLayout Flex:IPR
+    LyXType Custom
+    HTMLTag div
+    LabelString IPR
+End
+
+InsetLayout Flex:IETFArea
+    LyXType Custom
+    HTMLTag div
+    LabelString IETFArea
+End
+
+InsetLayout Flex:IETFWorkingGroup
+    LyXType Custom
+    HTMLTag div
+    LabelString IETFWorkingGroup
+End
+
+InsetLayout Flex:XML2RFCKeyword
+    LyXType Custom
+    HTMLTag div
+    LabelString XML2RFCKeyword
+End
+
+InsetLayout Flex:TitleAbbrev
+    LyXType Custom
+    HTMLTag div
+    LabelString TitleAbbrev
+End
+
+InsetLayout Flex:AuthorRole
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthRole
+End
+
+InsetLayout Flex:AuthorInitials
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthInitials
+End
+
+InsetLayout Flex:AuthorSurname
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthSurname
+End
+
+InsetLayout Flex:AuthorOrg
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthOrg
+End
+
+InsetLayout Flex:AuthorOrgAbbrev
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthOrgAbbrev
+End
+
+InsetLayout Flex:AuthorEmailAddr
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthEmailAddr
+End
+
+InsetLayout Flex:AuthorAddrStreet
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthAddrStreet
+End
+
+InsetLayout Flex:AuthorAddrCity
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthAddrCity
+End
+
+InsetLayout Flex:AuthorAddrRegion
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthAddrRegion
+End
+
+InsetLayout Flex:AuthorAddrCode
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthAddrCode
+End
+
+InsetLayout Flex:AuthorAddrCountry
+    LyXType Custom
+    HTMLTag div
+    LabelString AuthAddrCountry
+End
+
+InsetLayout Flex:EntityXRef
+    LyXType Custom
+    HTMLTag div
+    LabelString EntityXRef
+End
+
+InsetLayout Flex:BibXML
+    LyXType Custom
+    HTMLTag div
+    LabelString BibXML
+End
+
+InsetLayout Flex:EmbeddedBibXML
+    LyXType Custom
+    HTMLTag div
+    LabelString EmbeddedBibXML
+End
+\end_local_layout
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman cmr
+\font_sans cmss
+\font_typewriter cmtt
+\font_default_family ttdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+JSON Web Token Attribute Certificates
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex DocName
+status open
+
+\begin_layout Plain Layout
+draft-howard-jwt-attr-cert-00.txt
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex IPR
+status open
+
+\begin_layout Plain Layout
+trust200902
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex IntendedStatus
+status open
+
+\begin_layout Plain Layout
+exp
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex TitleAbbrev
+status open
+
+\begin_layout Plain Layout
+JSON Web Token Attribute Certificates
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex IETFArea
+status open
+
+\begin_layout Plain Layout
+Security Area
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex XML2RFCKeyword
+status open
+
+\begin_layout Plain Layout
+Internet-Draft
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex Updates
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex PI TOC
+status open
+
+\begin_layout Plain Layout
+yes
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI SymRefs
+status open
+
+\begin_layout Plain Layout
+yes
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI TOCIndent
+status open
+
+\begin_layout Plain Layout
+no
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI
+status open
+
+\begin_layout Plain Layout
+comments="yes"
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI
+status open
+
+\begin_layout Plain Layout
+inline="yes"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Luke Howard 
+\begin_inset Flex AuthorOrg
+status open
+
+\begin_layout Plain Layout
+PADL Software
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorOrgAbbrev
+status open
+
+\begin_layout Plain Layout
+PADL
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorInitials
+status open
+
+\begin_layout Plain Layout
+L.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorSurname
+status open
+
+\begin_layout Plain Layout
+Howard
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorAddrStreet
+status open
+
+\begin_layout Plain Layout
+PO Box 59
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex AuthorAddrCity
+status open
+
+\begin_layout Plain Layout
+Central Park
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorAddrRegion
+status open
+
+\begin_layout Plain Layout
+VIC
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorAddrCountry
+status open
+
+\begin_layout Plain Layout
+Australia
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorAddrCode
+status open
+
+\begin_layout Plain Layout
+3145
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex AuthorEmailAddr
+status open
+
+\begin_layout Plain Layout
+lukeh@padl.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+JSON Web Token (JWT) Attribute Certificates contain subsets of claims about
+ a subject to be transferred along with a primary JWT.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Introduction"
+
+\end_inset
+
+Introduction
+\end_layout
+
+\begin_layout Standard
+JSON Web Tokens 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ may be used to convey certified claims about a subject.
+ For example, the 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+BrowserID
+\end_layout
+
+\end_inset
+
+ protocol uses a JWT containing an e-mail address and public key to bind
+ an identity to a signing key.
+ JWTs may convey a variety of claims, however doing so in a single token
+ has some disadvantages.
+ First, all claims must be issued by the same entity (or the issuer must
+ contact other authorities).
+ Secondly, they must share the same validity period.
+ Finally, the disclosing party must reveal all claims or none.
+\end_layout
+
+\begin_layout Standard
+Attribute certificates (similar to those described in 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+RFC3281
+\end_layout
+
+\end_inset
+
+) allow additional claims, grouped by scope, to be disclosed separately.
+ A special claim is used to bind the attribute certificate to the primary
+ JWT with which it is associated.
+\end_layout
+
+\begin_layout Standard
+This document defines protocols, procedures and conventions for using a
+ JWT as an attribute certificate.
+\end_layout
+
+\begin_layout Section
+Requirements notation
+\end_layout
+
+\begin_layout Standard
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+ "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are
+ to be interpreted as described in 
+\begin_inset Flex EntityXRef
+status open
+
+\begin_layout Plain Layout
+RFC2119
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The reader is assumed to be familiar with the terms used in the base JWT
+ specifications.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Terminology"
+
+\end_inset
+
+Terminology
+\end_layout
+
+\begin_layout Description
+attribute
+\begin_inset space \space{}
+\end_inset
+
+certificate a JWT associated with a primary JWT that containing additional
+ claims about a subject
+\end_layout
+
+\begin_layout Description
+certificate
+\begin_inset space \space{}
+\end_inset
+
+digest
+\begin_inset space \space{}
+\end_inset
+
+information a claim binding an attribute certificate to its primary JWT
+\end_layout
+
+\begin_layout Description
+claims individual properties in a JWT, including attribute certificates
+\end_layout
+
+\begin_layout Description
+primary
+\begin_inset space \space{}
+\end_inset
+
+certificate a JWT certifying an identity and typically containing a public
+ key
+\end_layout
+
+\begin_layout Description
+scope a string that identifies the set of claims in an attribute certificate
+\end_layout
+
+\begin_layout Description
+selective
+\begin_inset space \space{}
+\end_inset
+
+attribute
+\begin_inset space \space{}
+\end_inset
+
+disclosure a system in which an authenticating party can choose which attribute
+ certificates to disclose to a relying party
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:jac-overview"
+
+\end_inset
+
+JWT Attribute Certificate Overview
+\end_layout
+
+\begin_layout Standard
+An attribute certificate is a JSON Web Token (per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 3) that contains the mandatory claims defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:jac-claims"
+
+\end_inset
+
+ and is associated with another JWT (the 
+\begin_inset Quotes eld
+\end_inset
+
+primary JWT
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Example JSON Attribute Certificate
+\end_layout
+
+\begin_layout Standard
+The following is an example of a JWT Attribute Certificate Claims Set, scoped
+ for profile information:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+  "scope": "profile",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "scope_description": "My standard profile",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "cdi": {
+\end_layout
+
+\begin_layout Plain Layout
+
+    "alg": "S256",
+\end_layout
+
+\begin_layout Plain Layout
+
+    "dig": "fHf5HxJuzWTSuepVY3N0BvWlvuXPNiUHwqsk0HX1Cjc"
+\end_layout
+
+\begin_layout Plain Layout
+
+  },
+\end_layout
+
+\begin_layout Plain Layout
+
+  "iss": "ca.example.com",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "name": "Luke Howard",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "given_name": "Luke",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "family_name": "Howard",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "website": "www.example.com/~lukeh",
+\end_layout
+
+\begin_layout Plain Layout
+
+  "preferred_username": "lukeh"
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Claims Set is encoded in a JWT and, in this example, signed with a key
+ belonging to 
+\begin_inset Quotes eld
+\end_inset
+
+ca.example.com
+\begin_inset Quotes erd
+\end_inset
+
+.
+ (Key distribution is outside the scope of this document.)
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:jac-claims"
+
+\end_inset
+
+Attribute Certificate Claims
+\end_layout
+
+\begin_layout Standard
+The following Claim Names are defined.
+ Furthermore, attribute certificates MAY contain the claims 
+\begin_inset Quotes eld
+\end_inset
+
+iss
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+iat
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+jti
+\begin_inset Quotes erd
+\end_inset
+
+, along with any other valid JWT Claims that are not present in the primary
+ JWT.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:cbi-claim"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+ (Certificate Binding Information)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+ (certificate binding information) claim identifies the primary JWT to which
+ the attribute certificate is bound.
+ Its value is a JSON object containing the name/value pairs (sub-claims)
+ defined below.
+ Use of this claim is REQUIRED.
+ (Note that the term 
+\begin_inset Quotes eld
+\end_inset
+
+certificate
+\begin_inset Quotes erd
+\end_inset
+
+ is used for consistency with 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+RFC3281
+\end_layout
+
+\end_inset
+
+; however there is no explicit requirement that the primary JWT contain
+ a public key or otherwise function as a certificate.)
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Quotes eld
+\end_inset
+
+alg
+\begin_inset Quotes erd
+\end_inset
+
+ (Digest Algorithm)
+\end_layout
+
+\begin_layout Standard
+This sub-claim contains a string identifying the digest algorithm used to
+ create a digest of the primary JWT.
+ Algorithms are defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:jac-digest-algs"
+
+\end_inset
+
+ of this document.
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Quotes eld
+\end_inset
+
+dig
+\begin_inset Quotes erd
+\end_inset
+
+ (Digest Value)
+\end_layout
+
+\begin_layout Standard
+This sub-claim contains the digest of the primary JWT using the algorithm
+ specified by the 
+\begin_inset Quotes eld
+\end_inset
+
+alg
+\begin_inset Quotes erd
+\end_inset
+
+ sub-claim.
+ It is encoded as a base 64 URL string.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:scope-claim"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+scope
+\begin_inset Quotes erd
+\end_inset
+
+ (Scope)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+scope
+\begin_inset Quotes erd
+\end_inset
+
+ claim identifies the set of claims contained in the attribute certificate.
+ Implementations SHOULD support the scope values defined by 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+OpenID.Core
+\end_layout
+
+\end_inset
+
+ Section 5.4.
+ Use of this claim is REQUIRED.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:scope_description-claim"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+ (Scope Description)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+ claim is a string suitable for displaying to an end-user that describes
+ the set of claims contained in the attribute certificate.
+ Use of this claim is OPTIONAL.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:jac-validation"
+
+\end_inset
+
+Rules for Creating and Validating an Attribute Certificate
+\end_layout
+
+\begin_layout Standard
+To create a JWT Attribute Certificate, one MUST perform these steps.
+ The order of the steps is not significant in cases where there are no dependenc
+ies between the inputs and outputs of the steps.
+\end_layout
+
+\begin_layout Enumerate
+Choose a digest algorithm to be used in creating a digest of the primary
+ JWT.
+ Place the corresponding algorithm identifier in the 
+\begin_inset Quotes eld
+\end_inset
+
+alg
+\begin_inset Quotes erd
+\end_inset
+
+ sub-claim of the 
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+ claim.
+\end_layout
+
+\begin_layout Enumerate
+Create a digest of the primary JWT and place it in the 
+\begin_inset Quotes eld
+\end_inset
+
+dig
+\begin_inset Quotes erd
+\end_inset
+
+ sub-claim of the 
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+ claim.
+\end_layout
+
+\begin_layout Enumerate
+Place the attribute certificate scope in the 
+\begin_inset Quotes eld
+\end_inset
+
+scope
+\begin_inset Quotes erd
+\end_inset
+
+ claim.
+\end_layout
+
+\begin_layout Enumerate
+Optionally, place a human readable description of the attribute certificate
+ scope in the 
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+ claim.
+\end_layout
+
+\begin_layout Enumerate
+Create a JWT containing a Claims Set with the above along with any additional
+ claims relevant to the attribute certificate scope.
+\end_layout
+
+\begin_layout Standard
+When validating a JWT Attribute Certificate, the following steps MUST be
+ taken.
+ The order of the steps is not significant in cases where there are no dependenc
+ies between the inputs and outputs of the steps.
+ If any of the listed steps fails then the JWT Attribute Certificate MUST
+ be rejected for processing.
+\end_layout
+
+\begin_layout Enumerate
+The attribute certificate MUST be a valid JWT.
+\end_layout
+
+\begin_layout Enumerate
+The algorithm in the 
+\begin_inset Quotes eld
+\end_inset
+
+alg
+\begin_inset Quotes erd
+\end_inset
+
+ sub-claim of the 
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+ claim MUST be a supported algorithm.
+\end_layout
+
+\begin_layout Enumerate
+The digest in the 
+\begin_inset Quotes eld
+\end_inset
+
+dig
+\begin_inset Quotes erd
+\end_inset
+
+ sub-claim of the 
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+ claim MUST match the digest of the primary JWT using the selected algorithm.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\begin_inset Quotes eld
+\end_inset
+
+scope
+\begin_inset Quotes erd
+\end_inset
+
+ claim of the attribute certificate MUST be unique amongst all attribute
+ certificates presented with the primary JWT.
+ (How attribute certificates and/or primary JWTs are presented is outside
+ the scope of this specification.)
+\end_layout
+
+\begin_layout Enumerate
+To avoid ambiguity, the attribute certificate MUST NOT have any claims that
+ are present in the primary JWT, other than 
+\begin_inset Quotes eld
+\end_inset
+
+iss
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+exp, 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+iat
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+jti
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The validity interval specified by the 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+ claims of the attribute certificate, if present, MUST match or be within
+ the interval specified by the 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+ claims of the primary JWT, if present.
+\end_layout
+
+\begin_layout Enumerate
+If the 
+\begin_inset Quotes eld
+\end_inset
+
+iss
+\begin_inset Quotes erd
+\end_inset
+
+ claim of the attribute certificate is absent, or is present and matches
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+iss
+\begin_inset Quotes erd
+\end_inset
+
+ claim of the primary JWT, the attribute certificate MUST be signed with
+ the same key as the primary JWT; otherwise, the signer of the attribute
+ certificate MUST be trusted by local policy.
+\end_layout
+
+\begin_layout Section
+Security Considerations
+\end_layout
+
+\begin_layout Standard
+Attribute certificates must be valid JWTs and are subject to the same validation
+ policy as the primary JWT.
+\end_layout
+
+\begin_layout Standard
+Claims Names that are present in both the primary JWT and the attribute
+ certificate (other than those explicitly permitted by this specification)
+ MUST be rejected.
+\end_layout
+
+\begin_layout Standard
+To avoid conflicts between identically named claims in different attribute
+ certificates, the relying party SHOULD group attribute certificate claims
+ by scope when surfacing them to the application.
+\end_layout
+
+\begin_layout Standard
+The presentation of attribute certificates is not defined this document.
+ However, attribute certificates SHOULD be presented over a secure channel
+ and, when used with primary JWTs that contain a public key, SHOULD be secured
+ by corresponding private key to avoid splicing attacks.
+\end_layout
+
+\begin_layout Section
+IANA Considerations
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:jac-claims-reg"
+
+\end_inset
+
+JSON Web Token Claims Registry
+\end_layout
+
+\begin_layout Standard
+The following Claim Names are registered in the IANA JSON Web Token Claims
+ registry created in 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 10.1.
+\end_layout
+
+\begin_layout Itemize
+Claim Name: 
+\begin_inset Quotes eld
+\end_inset
+
+cbi
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Claim Description: Certificate Binding Information
+\end_layout
+
+\begin_layout Itemize
+Change Controller: IESG
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:cbi-claim"
+
+\end_inset
+
+ of [[ this document ]]
+\end_layout
+
+\begin_layout Itemize
+Claim Name: 
+\begin_inset Quotes eld
+\end_inset
+
+scope
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Claim Description: Attribute Certificate Scope
+\end_layout
+
+\begin_layout Itemize
+Change Controller: IESG
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:scope-claim"
+
+\end_inset
+
+ of [[ this document ]]
+\end_layout
+
+\begin_layout Itemize
+Claim Name: 
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Claim Description: Attribute Certificate Scope Description
+\end_layout
+
+\begin_layout Itemize
+Change Controller: IESG
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:scope_description-claim"
+
+\end_inset
+
+ of [[ this document ]]
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:jac-digest-algs"
+
+\end_inset
+
+Attribute Certificate Digest Algorithms
+\end_layout
+
+\begin_layout Standard
+This section creates a registry of digest algorithms for binding an attribute
+ certificate to its primary JWT.
+\end_layout
+
+\begin_layout Itemize
+Algorithm Name: 
+\begin_inset Quotes eld
+\end_inset
+
+S256
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Algorithm Description: SHA-256 hash
+\end_layout
+
+\begin_layout Itemize
+Implementation Requirements: Required
+\end_layout
+
+\begin_layout Itemize
+Change Controller: IESG
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+SHS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Algorithm Name: 
+\begin_inset Quotes eld
+\end_inset
+
+S512
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Algorithm Description: SHA-512 hash
+\end_layout
+
+\begin_layout Itemize
+Implementation Requirements: Recommended
+\end_layout
+
+\begin_layout Itemize
+Change Controller: IESG
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+SHS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:References"
+
+\end_inset
+
+Normative References
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "RFC2119"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "JWA"
+target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-algorithms.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "JWK"
+target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-key.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "JWS"
+target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-signature.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "JWT"
+target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-json-web-token.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex EmbeddedBibXML
+status open
+
+\begin_layout Plain Layout
+<reference anchor="OpenID.Core"><front><title>OpenID Connect Basic Client
+ Implementer's Guide</title><author initials="M." surname="Jones" fullname="Mike
+ Jones"><organization>The OpenID Foundation</organization></author><date
+ year="2013" month="December"/></front><format type="HTML" target="http://openid.
+net/specs/openid-connect-core-1_0.html"/></reference>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex EmbeddedBibXML
+status open
+
+\begin_layout Plain Layout
+<reference anchor="SHS"><front><title abbrev="FIPS PUB 180-3">Secure Hash
+ Standard (SHS)</title><organization>National Institute of Standards and
+ Technology</organization><date year="2008" month="October"/></front><seriesInfo
+ name="FIPS" value="PUB 180-3" /></reference>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Informative References
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex EmbeddedBibXML
+status open
+
+\begin_layout Plain Layout
+<reference anchor="BrowserID"><front><title>BrowserID Specification</title><auth
+or initials="B." surname="Adida" fullname="Ben Adida"><organization>The Mozilla
+ Foundation</organization></author><date year="2013" day="26" month="February"/>
+</front><format type="TXT" target="https://raw.github.com/mozilla/id-specs/prod/br
+owserid/index.md"/></reference>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "RFC3281"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3281.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\begin_inset space \space{}
+\end_inset
+
+A BrowserID Profile
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+BrowserID
+\end_layout
+
+\end_inset
+
+ user agent (UA) may present a set of attribute certificates as a value
+ of the 
+\begin_inset Quotes eld
+\end_inset
+
+attribute_certs
+\begin_inset Quotes erd
+\end_inset
+
+ claim in the assertion (that is, an array of strings where each value is
+ a JWT attribute certificate).
+ This ensures that chosen set is authenticated in the user's private key.
+\end_layout
+
+\begin_layout Standard
+The primary JWT is the user's certificate issued by their identity provider
+ (IdP).
+\end_layout
+
+\begin_layout Standard
+The UA SHOULD only present attribute certificates when the relying party
+ (RP) has indicated its desire for specific scopes.
+ The UA MUST prompt the user for each disclosable scope before including
+ the corresponding attribute certificate in the presented assertion.
+\end_layout
+
+\end_body
+\end_document
