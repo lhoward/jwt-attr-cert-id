@@ -1763,6 +1763,15 @@ attribute_certs
 \begin_layout Standard
 The primary JWT is the certificate issued by the user's identity provider
  (IdP).
+ The IdP SHOULD localize the 
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+ claim according to the UA locale.
 \end_layout
 
 \begin_layout Standard
