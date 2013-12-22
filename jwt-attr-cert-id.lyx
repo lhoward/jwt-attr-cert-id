@@ -923,6 +923,13 @@ RFC3281
 \end_layout
 
 \begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:alg-subclaim"
+
+\end_inset
+
+
 \begin_inset Quotes eld
 \end_inset
 
@@ -947,6 +954,13 @@ reference "sub:jac-digest-algs"
 \end_layout
 
 \begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:dig-subclaim"
+
+\end_inset
+
+
 \begin_inset Quotes eld
 \end_inset
 
@@ -958,8 +972,28 @@ dig
 \end_layout
 
 \begin_layout Standard
-This sub-claim contains the digest of the primary JWT using the algorithm
- specified by the 
+This sub-claim contains the digest of the JWS (per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-jose-json-web-signature
+\end_layout
+
+\end_inset
+
+) or JWE (per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-jose-json-web-encryption
+\end_layout
+
+\end_inset
+
+) Compact Serialization of the primary JWT.
+ The digest algorithm is the one specified by the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -968,7 +1002,13 @@ alg
 \end_inset
 
  sub-claim.
- It is encoded as a base 64 URL string.
+ The digest is encoded as a base 64 URL string.
+\end_layout
+
+\begin_layout Standard
+In the case where the primary JWT has a JWS JSON Serialization and has multiple
+ signatures, the first signature is used when constructing the JWS Compact
+ Serialization for input to the digest algorithm.
 \end_layout
 
 \begin_layout Subsection
@@ -1544,6 +1584,60 @@ SHS
 \end_layout
 
 \begin_layout Section
+BrowserID Profile
+\end_layout
+
+\begin_layout Standard
+This section is non-normative.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+BrowserID
+\end_layout
+
+\end_inset
+
+ user agent (UA) may present a set of attribute certificates as a value
+ of the 
+\begin_inset Quotes eld
+\end_inset
+
+attribute_certs
+\begin_inset Quotes erd
+\end_inset
+
+ claim in an assertion (that is, an array of strings where each value is
+ a JWT attribute certificate).
+ This ensures that chosen set is authenticated by the user's private key.
+\end_layout
+
+\begin_layout Standard
+The primary JWT is the certificate issued by the user's identity provider
+ (IdP).
+ The IdP SHOULD localize the 
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+ claim according to the UA locale.
+\end_layout
+
+\begin_layout Standard
+The UA SHOULD only present attribute certificates when the relying party
+ (RP) has indicated its desire for specific scopes, and the user has explicitly
+ authorized disclosure of the attribute certificates corresponding to those
+ scopes.
+\end_layout
+
+\begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:References"
@@ -1582,6 +1676,26 @@ status open
 LatexCommand href
 name "JWA"
 target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-algorithms.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "JWE"
+target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-encryption.xml"
 
 \end_inset
 
@@ -1725,60 +1839,6 @@ target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3281.xml"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section*
-Appendix
-\begin_inset space \space{}
-\end_inset
-
-A BrowserID Profile
-\end_layout
-
-\begin_layout Standard
-A 
-\begin_inset Flex EntityXRef
-status collapsed
-
-\begin_layout Plain Layout
-BrowserID
-\end_layout
-
-\end_inset
-
- user agent (UA) may present a set of attribute certificates as a value
- of the 
-\begin_inset Quotes eld
-\end_inset
-
-attribute_certs
-\begin_inset Quotes erd
-\end_inset
-
- claim in the assertion (that is, an array of strings where each value is
- a JWT attribute certificate).
- This ensures that chosen set is authenticated by the user's private key.
-\end_layout
-
-\begin_layout Standard
-The primary JWT is the certificate issued by the user's identity provider
- (IdP).
- The IdP SHOULD localize the 
-\begin_inset Quotes eld
-\end_inset
-
-scope_description
-\begin_inset Quotes erd
-\end_inset
-
- claim according to the UA locale.
-\end_layout
-
-\begin_layout Standard
-The UA SHOULD only present attribute certificates when the relying party
- (RP) has indicated its desire for specific scopes, and the user has explicitly
- authorized disclosure of the attribute certificate corresponding to those
- scopes.
 \end_layout
 
 \end_body
