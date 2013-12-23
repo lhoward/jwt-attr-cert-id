@@ -690,7 +690,24 @@ Information a claim binding an Attribute Certificate to its Primary JWT
 \end_layout
 
 \begin_layout Description
-Claims individual properties in a JWT, including Attribute Certificates
+Claims individual properties in an Attribute Certificate or other JWT
+\end_layout
+
+\begin_layout Description
+JSON
+\begin_inset space \space{}
+\end_inset
+
+Web
+\begin_inset space \space{}
+\end_inset
+
+Token
+\begin_inset space \space{}
+\end_inset
+
+(JWT) a signed or encrypted structure for representing a set of Claims to
+ be transferred between two parties
 \end_layout
 
 \begin_layout Description
@@ -703,6 +720,14 @@ JWT a JWT certifying an identity and typically containing a public key
 
 \begin_layout Description
 Scope a string that identifies the set of claims in an Attribute Certificate
+\end_layout
+
+\begin_layout Description
+Scope
+\begin_inset space \space{}
+\end_inset
+
+Description a human readable description of the Scope
 \end_layout
 
 \begin_layout Section
@@ -1079,7 +1104,7 @@ scope
 \end_layout
 
 \begin_layout Standard
-In order to prevent collisions, scopes SHOULD either be registered in the
+In order to prevent collisions, Scopes SHOULD either be registered in the
  IANA JWT Attribute Certificate Scopes registry defined in 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1099,13 +1124,13 @@ I-D.ietf-oauth-json-web-token
 
  Section 2).
  A producer and consumer of a JWT Attribute Certificate MAY agree to use
- scopes that are not registered or Collision-Resistant, but this is discouraged
+ Scopes that are not registered or Collision-Resistant, but this is discouraged
  owing to the possibility of collision.
 \end_layout
 
 \begin_layout Standard
-Where the subject of the Primary JWT is an end-user, support for the OpenID
- Connect scopes defined in 
+Where the subject of the Primary JWT is an end-user, support for the scopes
+ defined in 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1478,7 +1503,7 @@ aud
 \end_inset
 
  claim, and the validating party would normally process this claim in a
- primary JWT, then the validating party MUST identify itself with one of
+ Primary JWT, then the validating party MUST identify itself with one of
  its values (per 
 \begin_inset Flex EntityXRef
 status collapsed
@@ -1550,9 +1575,17 @@ To avoid conflicts between identically named claims in different Attribute
 If the issuer of an Attribute Certificate differs from the issuer of the
  Primary JWT, trust in any claims made by the Attribute Certificate is subject
  to local policy (for example, different issuers may only be trusted to
- issue Attribute Certificates for certain scopes, and/or to make certain
+ issue Attribute Certificates for certain Scopes, and/or to issue certain
  claims).
  If no such policy exists, the Attribute Certificate MUST be ignored.
+\end_layout
+
+\begin_layout Standard
+User agents that permit selective disclosure of Attribute Certificates SHOULD
+ provide a means for the user to determine what claims are being made by
+ an Attribute Certificate, particularly in the cases where the Attribute
+ Certificate is not issued by the issuer of the Primary JWT, and/or only
+ the Scope Description is displayed by default.
 \end_layout
 
 \begin_layout Standard
