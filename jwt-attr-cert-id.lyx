@@ -508,8 +508,8 @@ lukeh@padl.com
 \end_layout
 
 \begin_layout Abstract
-JSON Web Token (JWT) Attribute Certificates contain subsets of claims about
- a subject to be transferred along with a primary JWT.
+JSON Web Token (JWT) Attribute Certificates contain additional scoped claims
+ to be presented alongside a primary JWT.
 \end_layout
 
 \begin_layout Standard
@@ -560,7 +560,7 @@ BrowserID
  First, all claims must be issued by the same entity (or the issuer must
  contact other authorities).
  Secondly, they must share the same validity period.
- Finally, the disclosing party must reveal all claims or none.
+ Finally, the disclosing party must either reveal all claims or none.
 \end_layout
 
 \begin_layout Standard
@@ -714,8 +714,8 @@ Example JSON Attribute Certificate
 \end_layout
 
 \begin_layout Standard
-The following is an example of a JWT Attribute Certificate Claims Set, scoped
- for profile information:
+The following is an example of a JWT Attribute Certificate Claims Set containing
+ a end-user's profile claims:
 \end_layout
 
 \begin_layout Standard
@@ -799,8 +799,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-The Claims Set is encoded in a JWT and, in this example, signed with a key
- belonging to 
+The Claims Set is signed (in this case, likely by 
 \begin_inset Quotes eld
 \end_inset
 
@@ -808,8 +807,7 @@ ca.example.com
 \begin_inset Quotes erd
 \end_inset
 
-.
- (Key distribution is outside the scope of this document.)
+) and encoded as a JWT; this encoding is the JWT Attribute Certificate.
 \end_layout
 
 \begin_layout Section
@@ -823,8 +821,8 @@ Attribute Certificate Claims
 \end_layout
 
 \begin_layout Standard
-The following Claim Names are defined.
- Furthermore, attribute certificates MAY contain the claims 
+The following Claim Names are defined for use in JWT Attribute Certificates.
+ Attribute certificates MAY also contain the claims 
 \begin_inset Quotes eld
 \end_inset
 
@@ -879,11 +877,11 @@ name "sub:cbi-claim"
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
- (Certificate Binding Information)
+ (Certificate Digest Information)
 \end_layout
 
 \begin_layout Standard
@@ -891,16 +889,19 @@ The
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
- (certificate binding information) claim identifies the primary JWT to which
- the attribute certificate is bound.
+ (certificate digest information) claim binds an attribute certificate to
+ its primary JWT.
  Its value is a JSON object containing the name/value pairs (sub-claims)
  defined below.
  Use of this claim is REQUIRED.
- (Note that the term 
+\end_layout
+
+\begin_layout Standard
+(Note that the term 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1039,7 +1040,12 @@ scope
 \end_inset
 
  claim identifies the set of claims contained in the attribute certificate.
- Implementations SHOULD support the scope values defined by 
+ Use of this claim is REQUIRED.
+\end_layout
+
+\begin_layout Standard
+Where the subject of the primary JWT is an end-user, support for the scopes
+ defined by 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1049,8 +1055,7 @@ OpenID.Core
 
 \end_inset
 
- Section 5.4.
- Use of this claim is REQUIRED.
+ Section 5.4 is RECOMMENDED.
 \end_layout
 
 \begin_layout Subsection
@@ -1104,7 +1109,7 @@ ies between the inputs and outputs of the steps.
 \begin_layout Enumerate
 Choose a digest algorithm to be used in creating a digest of the primary
  JWT.
- Place the corresponding algorithm identifier in the 
+ Place the corresponding Algorithm Name in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1116,7 +1121,7 @@ alg
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
@@ -1136,7 +1141,7 @@ dig
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
@@ -1182,8 +1187,39 @@ ies between the inputs and outputs of the steps.
  be rejected for processing.
 \end_layout
 
+\begin_layout Standard
+Note that the manner in which attribute certificates/primary JWTs are presented
+ to the validating party is outside the scope of this specification.
+ However, it is implicit that the primary JWT is available to the party
+ validating the attribute certificate.
+\end_layout
+
 \begin_layout Enumerate
-The attribute certificate MUST be a valid JWT.
+The primary JWT MUST be a valid JWT, per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 7.
+\end_layout
+
+\begin_layout Enumerate
+The attribute certificate MUST be a valid JWT, per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 7.
 \end_layout
 
 \begin_layout Enumerate
@@ -1199,7 +1235,7 @@ alg
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
@@ -1219,7 +1255,7 @@ dig
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
@@ -1237,8 +1273,6 @@ scope
 
  claim of the attribute certificate MUST be unique amongst all attribute
  certificates presented with the primary JWT.
- (How attribute certificates and/or primary JWTs are presented is outside
- the scope of this specification.)
 \end_layout
 
 \begin_layout Enumerate
@@ -1338,7 +1372,7 @@ iss
 \end_inset
 
  claim of the primary JWT, the attribute certificate MUST be signed with
- the same key as the primary JWT; otherwise, the signer of the attribute
+ a key that signed the primary JWT; otherwise, the signer of the attribute
  certificate MUST be trusted by local policy.
 \end_layout
 
@@ -1364,10 +1398,18 @@ To avoid conflicts between identically named claims in different attribute
 \end_layout
 
 \begin_layout Standard
-The presentation of attribute certificates is not defined this document.
+If the issuer of an attribute certificate differs from the issuer of the
+ primary JWT, trust in any claims made by the attribute certificate is subject
+ to local policy.
+ If no such policy exists, the attribute certificate MUST be ignored.
+\end_layout
+
+\begin_layout Standard
+The presentation of attribute certificates is not defined by this document.
  However, attribute certificates SHOULD be presented over a secure channel
  and, when used with primary JWTs that contain a public key, SHOULD be secured
- by corresponding private key to avoid splicing attacks.
+ by corresponding private key so that the choice of attribute certificates
+ is protected.
 \end_layout
 
 \begin_layout Section
@@ -1404,7 +1446,7 @@ Claim Name:
 \begin_inset Quotes eld
 \end_inset
 
-cbi
+cdi
 \begin_inset Quotes erd
 \end_inset
 
@@ -1412,7 +1454,7 @@ cbi
 \end_layout
 
 \begin_layout Itemize
-Claim Description: Certificate Binding Information
+Claim Description: Certificate Digest Information
 \end_layout
 
 \begin_layout Itemize
@@ -1584,6 +1626,12 @@ SHS
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:BrowserID"
+
+\end_inset
+
 BrowserID Profile
 \end_layout
 
@@ -1612,8 +1660,9 @@ attribute_certs
 \end_inset
 
  claim in an assertion (that is, an array of strings where each value is
- a JWT attribute certificate).
+ a JWS attribute certificate).
  This ensures that chosen set is authenticated by the user's private key.
+ BrowserID attribute certificates MUST use the JWS Compact Serialization.
 \end_layout
 
 \begin_layout Standard
