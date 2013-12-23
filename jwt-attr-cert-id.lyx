@@ -2327,6 +2327,11 @@ jac
 The Primary JWT is the certificate issued by the user's identity provider
  (IdP).
  The JAC validating party is the BrowserID Relying Party (RP).
+ The RP MAY provide the UA with a set of essential and voluntary Scopes
+ for authorizing the user.
+ The RP SHOULD deal gracefully with a user who refuses to disclose any Scopes,
+ for example by providing limited authorization rather than rejecting the
+ request entirely.
 \end_layout
 
 \begin_layout Standard
