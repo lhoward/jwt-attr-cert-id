@@ -555,7 +555,7 @@ BrowserID
 
  protocol uses a JWT containing an e-mail address and public key to bind
  an identity to a signing key.
- JWTs may convey a variety of claims, however doing so in a single token
+ JWTs may include a variety of claims, however doing so in a single token
  has some disadvantages.
  First, all claims must be issued by the same entity (or the issuer must
  contact other authorities).
@@ -620,54 +620,40 @@ Terminology
 \end_layout
 
 \begin_layout Description
-attribute
+Attribute
 \begin_inset space \space{}
 \end_inset
 
-certificate a JWT associated with a primary JWT that containing additional
+Certificate a JWT associated with a Primary JWT that containing additional
  claims about a subject
 \end_layout
 
 \begin_layout Description
-certificate
+Certificate
 \begin_inset space \space{}
 \end_inset
 
-digest
+Digest
 \begin_inset space \space{}
 \end_inset
 
-information a claim binding an attribute certificate to its primary JWT
+Information a claim binding an Attribute Certificate to its Primary JWT
 \end_layout
 
 \begin_layout Description
-claims individual properties in a JWT, including attribute certificates
+Claims individual properties in a JWT, including Attribute Certificates
 \end_layout
 
 \begin_layout Description
-primary
+Primary
 \begin_inset space \space{}
 \end_inset
 
-certificate a JWT certifying an identity and typically containing a public
- key
+JWT a JWT certifying an identity and typically containing a public key
 \end_layout
 
 \begin_layout Description
-scope a string that identifies the set of claims in an attribute certificate
-\end_layout
-
-\begin_layout Description
-selective
-\begin_inset space \space{}
-\end_inset
-
-attribute
-\begin_inset space \space{}
-\end_inset
-
-disclosure a system in which an authenticating party can choose which attribute
- certificates to disclose to a relying party
+Scope a string that identifies the set of claims in an Attribute Certificate
 \end_layout
 
 \begin_layout Section
@@ -681,7 +667,7 @@ JWT Attribute Certificate Overview
 \end_layout
 
 \begin_layout Standard
-An attribute certificate is a JSON Web Token (per 
+An Attribute Certificate is a JSON Web Token (per 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -698,15 +684,7 @@ reference "sec:jac-claims"
 
 \end_inset
 
- and is associated with another JWT (the 
-\begin_inset Quotes eld
-\end_inset
-
-primary JWT
-\begin_inset Quotes erd
-\end_inset
-
-).
+ and is associated with another JWT (the Primary JWT).
 \end_layout
 
 \begin_layout Subsection
@@ -822,7 +800,7 @@ Attribute Certificate Claims
 
 \begin_layout Standard
 The following Claim Names are defined for use in JWT Attribute Certificates.
- Attribute certificates MAY also contain the claims 
+ Attribute Certificates MAY also contain the claims 
 \begin_inset Quotes eld
 \end_inset
 
@@ -862,8 +840,9 @@ jti
 \begin_inset Quotes erd
 \end_inset
 
-, along with any other valid JWT Claims that are not present in the primary
- JWT.
+, along with any other valid JWT Claims.
+ Claims present in the Primary JWT SHOULD NOT be present in an Attribute
+ Certificate.
 \end_layout
 
 \begin_layout Subsection
@@ -893,8 +872,7 @@ cdi
 \begin_inset Quotes erd
 \end_inset
 
- (certificate digest information) claim binds an attribute certificate to
- its primary JWT.
+ claim binds an Attribute Certificate to its Primary JWT.
  Its value is a JSON object containing the name/value pairs (sub-claims)
  defined below.
  Use of this claim is REQUIRED.
@@ -919,7 +897,7 @@ RFC3281
 
 \end_inset
 
-; however there is no explicit requirement that the primary JWT contain
+; however there is no explicit requirement that the Primary JWT contain
  a public key or otherwise function as a certificate.)
 \end_layout
 
@@ -943,7 +921,7 @@ alg
 
 \begin_layout Standard
 This sub-claim contains a string identifying the digest algorithm used to
- create a digest of the primary JWT.
+ create a digest of the Primary JWT.
  Algorithms are defined in 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -993,7 +971,7 @@ I-D.ietf-jose-json-web-encryption
 
 \end_inset
 
-) Compact Serialization of the primary JWT.
+) Compact Serialization of the Primary JWT.
  The digest algorithm is the one specified by the 
 \begin_inset Quotes eld
 \end_inset
@@ -1007,7 +985,7 @@ alg
 \end_layout
 
 \begin_layout Standard
-In the case where the primary JWT has a JWS JSON Serialization and has multiple
+In the case where the Primary JWT has a JWS JSON Serialization and has multiple
  signatures, the first signature is used when constructing the JWS Compact
  Serialization for input to the digest algorithm.
 \end_layout
@@ -1039,13 +1017,39 @@ scope
 \begin_inset Quotes erd
 \end_inset
 
- claim identifies the set of claims contained in the attribute certificate.
+ claim is a case-sensitive string identifying the set of claims contained
+ in the Attribute Certificate.
  Use of this claim is REQUIRED.
 \end_layout
 
 \begin_layout Standard
-Where the subject of the primary JWT is an end-user, support for the scopes
- defined by 
+In order to prevent collisions, scopes SHOULD either be registered in the
+ IANA JWT Attribute Certificate Scopes registry defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:jac-scope-reg"
+
+\end_inset
+
+, or be a Collision-Resistant Name (per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 2).
+ A producer and consumer of a JWT Attribute Certificate MAY agree to use
+ scopes that are not registered or Collision-Resistant, but this is discouraged
+ owing to the possibility of collision.
+\end_layout
+
+\begin_layout Standard
+Where the subject of the Primary JWT is an end-user, support for the OpenID
+ Connect scopes defined in 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1086,7 +1090,7 @@ scope_description
 \end_inset
 
  claim is a string suitable for displaying to an end-user that describes
- the set of claims contained in the attribute certificate.
+ the set of claims contained in the Attribute Certificate.
  Use of this claim is OPTIONAL.
 \end_layout
 
@@ -1107,7 +1111,7 @@ ies between the inputs and outputs of the steps.
 \end_layout
 
 \begin_layout Enumerate
-Choose a digest algorithm to be used in creating a digest of the primary
+Choose a digest algorithm to be used in creating a digest of the Primary
  JWT.
  Place the corresponding Algorithm Name in the 
 \begin_inset Quotes eld
@@ -1129,7 +1133,7 @@ cdi
 \end_layout
 
 \begin_layout Enumerate
-Create a digest of the primary JWT and place it in the 
+Create a digest of the Primary JWT and place it in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1149,7 +1153,7 @@ cdi
 \end_layout
 
 \begin_layout Enumerate
-Place the attribute certificate scope in the 
+Place the Attribute Certificate Scope in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1161,8 +1165,8 @@ scope
 \end_layout
 
 \begin_layout Enumerate
-Optionally, place a human readable description of the attribute certificate
- scope in the 
+Optionally, place a human readable description of the Attribute Certificate
+ Scope in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1175,7 +1179,7 @@ scope_description
 
 \begin_layout Enumerate
 Create a JWT containing a Claims Set with the above along with any additional
- claims relevant to the attribute certificate scope.
+ claims relevant to the Attribute Certificate Scope.
 \end_layout
 
 \begin_layout Standard
@@ -1188,14 +1192,14 @@ ies between the inputs and outputs of the steps.
 \end_layout
 
 \begin_layout Standard
-Note that the manner in which attribute certificates/primary JWTs are presented
- to the validating party is outside the scope of this specification.
- However, it is implicit that the primary JWT is available to the party
- validating the attribute certificate.
+Note that the manner in which Attribute Certificates are presented to the
+ validating party is outside the scope of this specification.
+ However, it is assumed that the Primary JWT is available to the party validatin
+g the Attribute Certificate.
 \end_layout
 
 \begin_layout Enumerate
-The primary JWT MUST be a valid JWT, per 
+The Primary JWT MUST be a valid JWT, per 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1209,7 +1213,7 @@ I-D.ietf-oauth-json-web-token
 \end_layout
 
 \begin_layout Enumerate
-The attribute certificate MUST be a valid JWT, per 
+The Attribute Certificate MUST be a valid JWT, per 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1259,7 +1263,7 @@ cdi
 \begin_inset Quotes erd
 \end_inset
 
- claim MUST match the digest of the primary JWT using the selected algorithm.
+ claim MUST match the digest of the Primary JWT using the selected algorithm.
 \end_layout
 
 \begin_layout Enumerate
@@ -1271,13 +1275,13 @@ scope
 \begin_inset Quotes erd
 \end_inset
 
- claim of the attribute certificate MUST be unique amongst all attribute
- certificates presented with the primary JWT.
+ claim of the Attribute Certificate MUST be unique amongst all Attribute
+ Certificates presented with the Primary JWT.
 \end_layout
 
 \begin_layout Enumerate
-To avoid ambiguity, the attribute certificate MUST NOT have any claims that
- are present in the primary JWT, other than 
+To avoid ambiguity, the Attribute Certificate SHOULD NOT have any claims
+ that are present in the Primary JWT, other than 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1333,7 +1337,7 @@ exp
 \begin_inset Quotes erd
 \end_inset
 
- claims of the attribute certificate, if present, MUST match or be within
+ claims of the Attribute Certificate, if present, MUST match or be within
  the interval specified by the 
 \begin_inset Quotes eld
 \end_inset
@@ -1350,7 +1354,7 @@ exp
 \begin_inset Quotes erd
 \end_inset
 
- claims of the primary JWT, if present.
+ claims of the Primary JWT, if present.
 \end_layout
 
 \begin_layout Enumerate
@@ -1362,7 +1366,7 @@ iss
 \begin_inset Quotes erd
 \end_inset
 
- claim of the attribute certificate is absent, or is present and matches
+ claim of the Attribute Certificate is absent, or is present and matches
  the 
 \begin_inset Quotes eld
 \end_inset
@@ -1371,9 +1375,9 @@ iss
 \begin_inset Quotes erd
 \end_inset
 
- claim of the primary JWT, the attribute certificate MUST be signed with
- a key that signed the primary JWT; otherwise, the signer of the attribute
- certificate MUST be trusted by local policy.
+ claim of the Primary JWT, the Attribute Certificate MUST be signed with
+ a key that signed the Primary JWT; otherwise, the signer of the Attribute
+ Certificate MUST be trusted by local policy.
 \end_layout
 
 \begin_layout Section
@@ -1382,33 +1386,33 @@ Security Considerations
 
 \begin_layout Standard
 Attribute certificates must be valid JWTs and are subject to the same validation
- policy as the primary JWT.
+ policy as the Primary JWT.
 \end_layout
 
 \begin_layout Standard
-Claims Names that are present in both the primary JWT and the attribute
- certificate (other than those explicitly permitted by this specification)
- MUST be rejected.
+Claims Names that are present in both the Primary JWT and the Attribute
+ Certificate (other than those explicitly permitted by this specification)
+ SHOULD be rejected.
 \end_layout
 
 \begin_layout Standard
-To avoid conflicts between identically named claims in different attribute
- certificates, the relying party SHOULD group attribute certificate claims
- by scope when surfacing them to the application.
+To avoid conflicts between identically named claims in different Attribute
+ Certificates, the relying party SHOULD group Attribute Certificate claims
+ by Scope when surfacing them to the application.
 \end_layout
 
 \begin_layout Standard
-If the issuer of an attribute certificate differs from the issuer of the
- primary JWT, trust in any claims made by the attribute certificate is subject
+If the issuer of an Attribute Certificate differs from the issuer of the
+ Primary JWT, trust in any claims made by the Attribute Certificate is subject
  to local policy.
- If no such policy exists, the attribute certificate MUST be ignored.
+ If no such policy exists, the Attribute Certificate MUST be ignored.
 \end_layout
 
 \begin_layout Standard
-The presentation of attribute certificates is not defined by this document.
- However, attribute certificates SHOULD be presented over a secure channel
- and, when used with primary JWTs that contain a public key, SHOULD be secured
- by corresponding private key so that the choice of attribute certificates
+The presentation of Attribute Certificates is not defined by this document.
+ However, Attribute Certificates SHOULD be presented over a secure channel
+ and, when used with Primary JWTs that contain a public key, SHOULD be secured
+ by corresponding private key so that the choice of Attribute Certificates
  is protected.
 \end_layout
 
@@ -1541,12 +1545,71 @@ name "sub:jac-digest-algs"
 
 \end_inset
 
-Attribute Certificate Digest Algorithms
+JWT Attribute Certificate Digest Algorithm Registry
 \end_layout
 
 \begin_layout Standard
-This section creates a registry of digest algorithms for binding an attribute
- certificate to its primary JWT.
+This section creates a registry of digest algorithms for binding an Attribute
+ Certificate to its Primary JWT.
+\end_layout
+
+\begin_layout Subsubsection
+Registration Template
+\end_layout
+
+\begin_layout Description
+Algorithm
+\begin_inset space \space{}
+\end_inset
+
+Name: A string identifying the digest algorithm.
+ It is RECOMMENDED that the name be short -- not to exceed 8 characters
+ without a compelling reason to do so.
+ This name is case-sensitive.
+\end_layout
+
+\begin_layout Description
+Algorithm
+\begin_inset space \space{}
+\end_inset
+
+Description: Brief description of the digest algorithm.
+\end_layout
+
+\begin_layout Description
+Implementation
+\begin_inset space \space{}
+\end_inset
+
+Requirements: The algorithm implementation requirements, which must be one
+ the words Required, Recommended, Optional, Deprecated, or Prohibited.
+\end_layout
+
+\begin_layout Description
+Change
+\begin_inset space \space{}
+\end_inset
+
+Controller: For Standards Track RFCs, state "IESG".
+ For others, give the name of the responsible party.
+ Other details (e.g., postal address, email address, home page URI) may also
+ be included.
+\end_layout
+
+\begin_layout Description
+Specification
+\begin_inset space \space{}
+\end_inset
+
+Document(s): Reference to the document(s) that specify the algorithm, preferably
+ including URI(s) that can be used to retrieve copies of the document(s).
+ An indication of the relevant sections may also be included but is not
+ required.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Initial Registry Contents
 \end_layout
 
 \begin_layout Itemize
@@ -1574,7 +1637,7 @@ Change Controller: IESG
 \end_layout
 
 \begin_layout Itemize
-Specification Document(s): 
+Specification Document(s): Section 6.2 of 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1604,7 +1667,7 @@ Algorithm Description: SHA-512 hash
 \end_layout
 
 \begin_layout Itemize
-Implementation Requirements: Recommended
+Implementation Requirements: Optional
 \end_layout
 
 \begin_layout Itemize
@@ -1612,7 +1675,7 @@ Change Controller: IESG
 \end_layout
 
 \begin_layout Itemize
-Specification Document(s): 
+Specification Document(s): Section 6.4 of 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1625,65 +1688,204 @@ SHS
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:BrowserID"
+name "sub:jac-scope-reg"
 
 \end_inset
 
-BrowserID Profile
+JWT Attribute Certificate Scope Registry
 \end_layout
 
 \begin_layout Standard
-This section is non-normative.
+This section creates a registry of Scopes for grouping the set of claims
+ in an Attribute Certificate.
 \end_layout
 
-\begin_layout Standard
-A 
+\begin_layout Subsubsection
+Registration Template
+\end_layout
+
+\begin_layout Description
+Scope
+\begin_inset space \space{}
+\end_inset
+
+Name: A string identifying the Scope.
+\end_layout
+
+\begin_layout Description
+Scope
+\begin_inset space \space{}
+\end_inset
+
+Description: Brief description of the Scope.
+ The description MAY include the Claim Names.
+\end_layout
+
+\begin_layout Description
+Change
+\begin_inset space \space{}
+\end_inset
+
+Controller: For Standards Track RFCs, state "IESG".
+ For others, give the name of the responsible party.
+ Other details (e.g., postal address, email address, home page URI) may also
+ be included.
+\end_layout
+
+\begin_layout Description
+Specification
+\begin_inset space \space{}
+\end_inset
+
+Document(s): Reference to the document(s) that specify the algorithm, preferably
+ including URI(s) that can be used to retrieve copies of the document(s).
+ An indication of the relevant sections may also be included but is not
+ required.
+\end_layout
+
+\begin_layout Subsubsection
+Initial Registry Contents
+\end_layout
+
+\begin_layout Itemize
+Scope Name: 
+\begin_inset Quotes eld
+\end_inset
+
+profile
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Scope Description: The End-User's default profile claims, which are name,
+ family_name, given_name, middle_name, nickname, preferred_username, profile,
+ picture, website, gender, birthdate, zoneinfo, locale, and updated_at.
+\end_layout
+
+\begin_layout Itemize
+Change Controller: The OpenID Foundation
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): Section 5.4 of 
 \begin_inset Flex EntityXRef
 status collapsed
 
 \begin_layout Plain Layout
-BrowserID
+OpenID.Core
 \end_layout
 
 \end_inset
 
- user agent (UA) may present a set of attribute certificates as a value
- of the 
+
+\end_layout
+
+\begin_layout Itemize
+Scope Name: 
 \begin_inset Quotes eld
 \end_inset
 
-attribute_certs
+email
 \begin_inset Quotes erd
 \end_inset
 
- claim in an assertion (that is, an array of strings where each value is
- a JWS attribute certificate).
- This ensures that chosen set is authenticated by the user's private key.
- BrowserID attribute certificates MUST use the JWS Compact Serialization.
+
 \end_layout
 
-\begin_layout Standard
-The primary JWT is the certificate issued by the user's identity provider
- (IdP).
- The IdP SHOULD localize the 
+\begin_layout Itemize
+Scope Description: The email and email_verified claims
+\end_layout
+
+\begin_layout Itemize
+Change Controller: The OpenID Foundation
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): Section 5.4 of 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+OpenID.Core
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Scope Name: 
 \begin_inset Quotes eld
 \end_inset
 
-scope_description
+address
 \begin_inset Quotes erd
 \end_inset
 
- claim according to the UA locale.
+
 \end_layout
 
-\begin_layout Standard
-The UA SHOULD only present attribute certificates when the relying party
- (RP) has indicated its desire for specific scopes, and the user has explicitly
- authorized disclosure of the attribute certificates corresponding to those
- scopes.
+\begin_layout Itemize
+Scope Description: The address claim
+\end_layout
+
+\begin_layout Itemize
+Change Controller: The OpenID Foundation
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): Section 5.4 of 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+OpenID.Core
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Scope Name: 
+\begin_inset Quotes eld
+\end_inset
+
+phone
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Scope Description: The phone_number and phone_number_verified claims
+\end_layout
+
+\begin_layout Itemize
+Change Controller: The OpenID Foundation
+\end_layout
+
+\begin_layout Itemize
+Specification Document(s): Section 5.4 of 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+OpenID.Core
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1838,10 +2040,10 @@ net/specs/openid-connect-core-1_0.html"/></reference>
 status open
 
 \begin_layout Plain Layout
-<reference anchor="SHS"><front><title abbrev="FIPS PUB 180-3">Secure Hash
+<reference anchor="SHS"><front><title abbrev="FIPS PUB 180-4">Secure Hash
  Standard (SHS)</title><organization>National Institute of Standards and
- Technology</organization><date year="2008" month="October"/></front><seriesInfo
- name="FIPS" value="PUB 180-3" /></reference>
+ Technology</organization><date year="2012" month="March"/></front><seriesInfo
+ name="FIPS" value="PUB 180-4" /></reference>
 \end_layout
 
 \end_inset
@@ -1888,6 +2090,68 @@ target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3281.xml"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:BrowserID"
+
+\end_inset
+
+BrowserID Profile
+\end_layout
+
+\begin_layout Standard
+This section is non-normative.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+BrowserID
+\end_layout
+
+\end_inset
+
+ user agent (UA) may present a set of Attribute Certificates as a value
+ of the 
+\begin_inset Quotes eld
+\end_inset
+
+attribute_certs
+\begin_inset Quotes erd
+\end_inset
+
+ claim in an assertion (that is, an array of strings where each value is
+ a JWT Attribute Certificate).
+ This ensures that chosen set is authenticated by the user's private key.
+ BrowserID Attribute Certificates MUST use the JWS Compact Serialization.
+\end_layout
+
+\begin_layout Standard
+The Primary JWT is the certificate issued by the user's identity provider
+ (IdP).
+ The IdP SHOULD localize the 
+\begin_inset Quotes eld
+\end_inset
+
+scope_description
+\begin_inset Quotes erd
+\end_inset
+
+ claim according to the UA locale.
+\end_layout
+
+\begin_layout Standard
+The UA SHOULD only present Attribute Certificates when the relying party
+ (RP) has indicated its desire for specific Scopes, and the user has explicitly
+ authorized disclosure of the Attribute Certificates corresponding to those
+ Scopes.
 \end_layout
 
 \end_body
