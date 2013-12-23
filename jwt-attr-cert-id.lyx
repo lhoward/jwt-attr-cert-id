@@ -1517,8 +1517,18 @@ Security Considerations
 \end_layout
 
 \begin_layout Standard
-Attribute certificates must be valid JWTs and are subject to the same validation
+Attribute Certificates must be valid JWTs and are subject to the same validation
  policy as the Primary JWT.
+\end_layout
+
+\begin_layout Standard
+Attribute Certificate issuers must protect their private keys.
+\end_layout
+
+\begin_layout Standard
+The binding between an Attribute Certificate and the Primary JWT cannot
+ be stronger than the algorithm used to generate the Certificate Digest
+ Information.
 \end_layout
 
 \begin_layout Standard
@@ -1536,7 +1546,9 @@ To avoid conflicts between identically named claims in different Attribute
 \begin_layout Standard
 If the issuer of an Attribute Certificate differs from the issuer of the
  Primary JWT, trust in any claims made by the Attribute Certificate is subject
- to local policy.
+ to local policy (for example, different issuers may only be trusted to
+ issue Attribute Certificates for certain scopes, and/or to make certain
+ claims).
  If no such policy exists, the Attribute Certificate MUST be ignored.
 \end_layout
 
