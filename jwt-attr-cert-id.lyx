@@ -2327,11 +2327,21 @@ jac
 The Primary JWT is the certificate issued by the user's identity provider
  (IdP).
  The JAC validating party is the BrowserID Relying Party (RP).
- The RP MAY provide the UA with a set of essential and voluntary Scopes
- for authorizing the user.
- The RP SHOULD deal gracefully with a user who refuses to disclose any Scopes,
- for example by providing limited authorization rather than rejecting the
- request entirely.
+ The RP MAY provide the UA with a set of Scopes it desires in order to authorize
+ the user; these should be divided into Essential Scopes (those which it
+ deems necessary to authorize the user) and Voluntary Scopes (those which
+ it deems useful but not necessary).
+ (This language is consistent with 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+OpenID.Core
+\end_layout
+
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
@@ -2350,6 +2360,9 @@ scope_description
 The UA SHOULD only present JACs when the RP has indicated its desire for
  specific Scopes, and the user has explicitly authorized disclosure of the
  JACs corresponding to those Scopes.
+ The RP SHOULD deal gracefully with a user who refuses to disclose Essential
+ Scopes, for example by providing limited authorization rather than rejecting
+ the request entirely.
 \end_layout
 
 \end_body
