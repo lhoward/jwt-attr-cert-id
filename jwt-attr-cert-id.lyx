@@ -1539,7 +1539,7 @@ Claims Names that are present in both the Primary JWT and the Attribute
 
 \begin_layout Standard
 To avoid conflicts between identically named claims in different Attribute
- Certificates, the relying party SHOULD group Attribute Certificate claims
+ Certificates, the validating party SHOULD group Attribute Certificate claims
  by Scope when surfacing them to the application.
 \end_layout
 
@@ -2299,7 +2299,12 @@ attribute_certs
 \begin_layout Standard
 The Primary JWT is the certificate issued by the user's identity provider
  (IdP).
- The IdP SHOULD localize the 
+ The Attribute Certificate validating party is the BrowserID Relying Party
+ (RP).
+\end_layout
+
+\begin_layout Standard
+The IdP SHOULD localize the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2311,10 +2316,9 @@ scope_description
 \end_layout
 
 \begin_layout Standard
-The UA SHOULD only present Attribute Certificates when the relying party
- (RP) has indicated its desire for specific Scopes, and the user has explicitly
- authorized disclosure of the Attribute Certificates corresponding to those
- Scopes.
+The UA SHOULD only present Attribute Certificates when the RP has indicated
+ its desire for specific Scopes, and the user has explicitly authorized
+ disclosure of the Attribute Certificates corresponding to those Scopes.
 \end_layout
 
 \end_body
