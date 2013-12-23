@@ -629,6 +629,55 @@ Certificate a JWT associated with a Primary JWT that containing additional
 \end_layout
 
 \begin_layout Description
+Attribute
+\begin_inset space \space{}
+\end_inset
+
+Certificate
+\begin_inset space \space{}
+\end_inset
+
+Validity the time interval in which the Attribute Certificate is valid,
+ as expressed by the 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 4.1.5) and 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 4.1.4) claims
+\end_layout
+
+\begin_layout Description
 Certificate
 \begin_inset space \space{}
 \end_inset
@@ -804,6 +853,14 @@ The following Claim Names are defined for use in JWT Attribute Certificates.
 \begin_inset Quotes eld
 \end_inset
 
+aud
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
 iss
 \begin_inset Quotes erd
 \end_inset
@@ -841,7 +898,7 @@ jti
 \end_inset
 
 , along with any other valid JWT Claims.
- Claims present in the Primary JWT SHOULD NOT be present in an Attribute
+ Other claims present in the Primary JWT SHOULD NOT be present in an Attribute
  Certificate.
 \end_layout
 
@@ -1285,6 +1342,14 @@ To avoid ambiguity, the Attribute Certificate SHOULD NOT have any claims
 \begin_inset Quotes eld
 \end_inset
 
+aud
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
 iss
 \begin_inset Quotes erd
 \end_inset
@@ -1321,43 +1386,6 @@ jti
 \end_layout
 
 \begin_layout Enumerate
-The validity interval specified by the 
-\begin_inset Quotes eld
-\end_inset
-
-nbf
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-exp
-\begin_inset Quotes erd
-\end_inset
-
- claims of the Attribute Certificate, if present, MUST match or be within
- the interval specified by the 
-\begin_inset Quotes eld
-\end_inset
-
-nbf
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-exp
-\begin_inset Quotes erd
-\end_inset
-
- claims of the Primary JWT, if present.
-\end_layout
-
-\begin_layout Enumerate
 If the 
 \begin_inset Quotes eld
 \end_inset
@@ -1377,7 +1405,111 @@ iss
 
  claim of the Primary JWT, the Attribute Certificate MUST be signed with
  a key that signed the Primary JWT; otherwise, the signer of the Attribute
- Certificate MUST be trusted by local policy.
+ Certificate MUST be directly trusted (by configuration or otherwise).
+\end_layout
+
+\begin_layout Enumerate
+The time for which the Attribute Certificate is being validated MUST be
+ within the Attribute Certificate Validity.
+ If the evaluation time is equal to the time expressed by either of the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+ claims, the Attribute Certificate is timely and this check succeeds.
+ Note that in some applications, the evaluation time MAY not be the same
+ as the current time.
+ (This language is based on 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+RFC3281
+\end_layout
+
+\end_inset
+
+ Section 5.)
+\end_layout
+
+\begin_layout Enumerate
+The Attribute Certificate Validity MUST match or be within the interval
+ specified by the 
+\begin_inset Quotes eld
+\end_inset
+
+nbf
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+ claims of the Primary JWT, if present.
+\end_layout
+
+\begin_layout Enumerate
+If the Attribute Certificate contains an 
+\begin_inset Quotes eld
+\end_inset
+
+aud
+\begin_inset Quotes erd
+\end_inset
+
+ claim, and the validating party would normally process this claim in a
+ primary JWT, then the validating party MUST identify itself with one of
+ its values (per 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-json-web-token
+\end_layout
+
+\end_inset
+
+ Section 4.1.3).
+ This claim has the effect of restricting any values of the 
+\begin_inset Quotes eld
+\end_inset
+
+aud
+\begin_inset Quotes erd
+\end_inset
+
+ claim in the primary JWT.
+\end_layout
+
+\begin_layout Standard
+Additional checks:
+\end_layout
+
+\begin_layout Enumerate
+The Attribute Certificate MAY be rejected on the basis of further validating
+ party configuration.
+\end_layout
+
+\begin_layout Enumerate
+The validating party MAY filter the attributes returned to the application
+ on the basis of configuration information.
 \end_layout
 
 \begin_layout Section
@@ -1414,6 +1546,25 @@ The presentation of Attribute Certificates is not defined by this document.
  and, when used with Primary JWTs that contain a public key, SHOULD be secured
  by corresponding private key so that the choice of Attribute Certificates
  is protected.
+\end_layout
+
+\begin_layout Standard
+This specification does not discuss revocation.
+ It is assumed that the Attribute Certificate Validity will typically be
+ less than the time required to issue and distribute revocation information
+ (see 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+RFC3281
+\end_layout
+
+\end_inset
+
+ Section 6).
+ If revocation is required, it SHOULD be discussed when profiling this specifica
+tion for a particular application or protocol.
 \end_layout
 
 \begin_layout Section
@@ -2100,7 +2251,7 @@ name "sec:BrowserID"
 
 \end_inset
 
-BrowserID Profile
+BrowserID Attribute Certificate Profile
 \end_layout
 
 \begin_layout Standard
