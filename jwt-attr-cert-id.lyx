@@ -849,11 +849,12 @@ Attribute Certificate Claims
 
 \begin_layout Standard
 The following Claim Names are defined for use in JWT Attribute Certificates.
- Attribute Certificates MAY also contain the claims 
+ Attribute Certificates MAY contain other claims.
+ Claims present in the Primary JWT, with the exception of 
 \begin_inset Quotes eld
 \end_inset
 
-aud
+iss
 \begin_inset Quotes erd
 \end_inset
 
@@ -861,7 +862,7 @@ aud
 \begin_inset Quotes eld
 \end_inset
 
-iss
+aud
 \begin_inset Quotes erd
 \end_inset
 
@@ -889,7 +890,7 @@ iat
 \begin_inset Quotes erd
 \end_inset
 
- or 
+ and 
 \begin_inset Quotes eld
 \end_inset
 
@@ -897,9 +898,7 @@ jti
 \begin_inset Quotes erd
 \end_inset
 
-, along with any other valid JWT Claims.
- Other claims present in the Primary JWT SHOULD NOT be present in an Attribute
- Certificate.
+, SHOULD NOT be present in an Attribute Certificate.
 \end_layout
 
 \begin_layout Subsection
@@ -1342,14 +1341,6 @@ To avoid ambiguity, the Attribute Certificate SHOULD NOT have any claims
 \begin_inset Quotes eld
 \end_inset
 
-aud
-\begin_inset Quotes erd
-\end_inset
-
-, 
-\begin_inset Quotes eld
-\end_inset
-
 iss
 \begin_inset Quotes erd
 \end_inset
@@ -1358,7 +1349,19 @@ iss
 \begin_inset Quotes eld
 \end_inset
 
-exp, 
+aud
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+exp
+\begin_inset Quotes erd
+\end_inset
+
+, 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1374,7 +1377,7 @@ iat
 \begin_inset Quotes erd
 \end_inset
 
- or 
+ and 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1556,7 +1559,7 @@ If the issuer of an Attribute Certificate differs from the issuer of the
 The presentation of Attribute Certificates is not defined by this document.
  However, Attribute Certificates SHOULD be presented over a secure channel
  and, when used with Primary JWTs that contain a public key, SHOULD be secured
- by corresponding private key so that the choice of Attribute Certificates
+ by the corresponding private key so that the choice of Attribute Certificates
  is protected.
 \end_layout
 
