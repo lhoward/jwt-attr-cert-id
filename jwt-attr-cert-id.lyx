@@ -274,7 +274,7 @@ End
 \begin_body
 
 \begin_layout Title
-JSON Web Token Attribute Certificates
+JWT Attribute Certificate (JAC)
 \end_layout
 
 \begin_layout Standard
@@ -312,7 +312,7 @@ exp
 status open
 
 \begin_layout Plain Layout
-JSON Web Token Attribute Certificates
+JWT Attribute Certificate (JAC)
 \end_layout
 
 \end_inset
@@ -508,8 +508,8 @@ lukeh@padl.com
 \end_layout
 
 \begin_layout Abstract
-JSON Web Token (JWT) Attribute Certificates contain additional scoped claims
- to be presented alongside a primary JWT.
+A JSON Web Token Attribute Certificate (JAC) contains additional claims,
+ grouped by scope, to be presented alongside a primary JWT.
 \end_layout
 
 \begin_layout Standard
@@ -620,25 +620,28 @@ Terminology
 \end_layout
 
 \begin_layout Description
-Attribute
-\begin_inset space \space{}
-\end_inset
-
-Certificate a JWT associated with a Primary JWT that containing additional
- claims about a subject
-\end_layout
-
-\begin_layout Description
-Attribute
-\begin_inset space \space{}
-\end_inset
-
 Certificate
 \begin_inset space \space{}
 \end_inset
 
-Validity the time interval in which the Attribute Certificate is valid,
- as expressed by the 
+Digest
+\begin_inset space \space{}
+\end_inset
+
+Information a claim binding a JAC to its Primary JWT
+\end_layout
+
+\begin_layout Description
+Claims individual properties in a JAC or other JWT
+\end_layout
+
+\begin_layout Description
+JAC
+\begin_inset space \space{}
+\end_inset
+
+Validity the time interval in which the JAC is valid, as expressed by the
+ 
 \begin_inset Quotes eld
 \end_inset
 
@@ -678,19 +681,20 @@ I-D.ietf-oauth-json-web-token
 \end_layout
 
 \begin_layout Description
+JWT
+\begin_inset space \space{}
+\end_inset
+
+Attribute
+\begin_inset space \space{}
+\end_inset
+
 Certificate
 \begin_inset space \space{}
 \end_inset
 
-Digest
-\begin_inset space \space{}
-\end_inset
-
-Information a claim binding an Attribute Certificate to its Primary JWT
-\end_layout
-
-\begin_layout Description
-Claims individual properties in an Attribute Certificate or other JWT
+(JAC) a JWT associated with a Primary JWT that containing additional claims
+ about a subject
 \end_layout
 
 \begin_layout Description
@@ -719,7 +723,7 @@ JWT a JWT certifying an identity and typically containing a public key
 \end_layout
 
 \begin_layout Description
-Scope a string that identifies the set of claims in an Attribute Certificate
+Scope a string that identifies the set of claims in a JAC
 \end_layout
 
 \begin_layout Description
@@ -727,7 +731,8 @@ Scope
 \begin_inset space \space{}
 \end_inset
 
-Description a human readable description of the Scope
+Description a human readable description of the Scope suitable for displaying
+ by a user agent
 \end_layout
 
 \begin_layout Section
@@ -737,11 +742,11 @@ name "sec:jac-overview"
 
 \end_inset
 
-JWT Attribute Certificate Overview
+JWT Attribute Certificate (JAC) Overview
 \end_layout
 
 \begin_layout Standard
-An Attribute Certificate is a JSON Web Token (per 
+A JWT Attribute Certificate is a JSON Web Token (per 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -762,12 +767,12 @@ reference "sec:jac-claims"
 \end_layout
 
 \begin_layout Subsection
-Example JSON Attribute Certificate
+Example JAC
 \end_layout
 
 \begin_layout Standard
-The following is an example of a JWT Attribute Certificate Claims Set containing
- a end-user's profile claims:
+The following is an example of a JAC Claims Set containing a end-user's
+ profile claims:
 \end_layout
 
 \begin_layout Standard
@@ -859,7 +864,7 @@ ca.example.com
 \begin_inset Quotes erd
 \end_inset
 
-) and encoded as a JWT; this encoding is the JWT Attribute Certificate.
+) and encoded as a JWT; this encoding is the JAC.
 \end_layout
 
 \begin_layout Section
@@ -869,12 +874,12 @@ name "sec:jac-claims"
 
 \end_inset
 
-Attribute Certificate Claims
+JAC Claims
 \end_layout
 
 \begin_layout Standard
-The following Claim Names are defined for use in JWT Attribute Certificates.
- Attribute Certificates MAY contain other claims.
+The following Claim Names are defined for use in JACs.
+ JACs MAY contain other claims.
  Claims present in the Primary JWT, with the exception of 
 \begin_inset Quotes eld
 \end_inset
@@ -923,7 +928,7 @@ jti
 \begin_inset Quotes erd
 \end_inset
 
-, SHOULD NOT be present in an Attribute Certificate.
+, SHOULD NOT be present in a JAC.
 \end_layout
 
 \begin_layout Subsection
@@ -953,7 +958,7 @@ cdi
 \begin_inset Quotes erd
 \end_inset
 
- claim binds an Attribute Certificate to its Primary JWT.
+ claim binds a JAC to its Primary JWT.
  Its value is a JSON object containing the name/value pairs (sub-claims)
  defined below.
  Use of this claim is REQUIRED.
@@ -1099,13 +1104,13 @@ scope
 \end_inset
 
  claim is a case-sensitive string identifying the set of claims contained
- in the Attribute Certificate.
+ in the JAC.
  Use of this claim is REQUIRED.
 \end_layout
 
 \begin_layout Standard
 In order to prevent collisions, Scopes SHOULD either be registered in the
- IANA JWT Attribute Certificate Scopes registry defined in 
+ IANA JAC Scopes registry defined in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:jac-scope-reg"
@@ -1123,9 +1128,9 @@ I-D.ietf-oauth-json-web-token
 \end_inset
 
  Section 2).
- A producer and consumer of a JWT Attribute Certificate MAY agree to use
- Scopes that are not registered or Collision-Resistant, but this is discouraged
- owing to the possibility of collision.
+ A producer and consumer of a JAC MAY agree to use Scopes that are not registere
+d or Collision-Resistant, but this is discouraged owing to the possibility
+ of collision.
 \end_layout
 
 \begin_layout Standard
@@ -1171,7 +1176,7 @@ scope_description
 \end_inset
 
  claim is a string suitable for displaying to an end-user that describes
- the set of claims contained in the Attribute Certificate.
+ the set of claims contained in the JAC.
  Use of this claim is OPTIONAL.
 \end_layout
 
@@ -1182,11 +1187,11 @@ name "sec:jac-validation"
 
 \end_inset
 
-Rules for Creating and Validating an Attribute Certificate
+Rules for Creating and Validating a JAC
 \end_layout
 
 \begin_layout Standard
-To create a JWT Attribute Certificate, one MUST perform these steps.
+To create a JAC, one MUST perform these steps.
  The order of the steps is not significant in cases where there are no dependenc
 ies between the inputs and outputs of the steps.
 \end_layout
@@ -1234,7 +1239,7 @@ cdi
 \end_layout
 
 \begin_layout Enumerate
-Place the Attribute Certificate Scope in the 
+Place the Scope in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1246,8 +1251,7 @@ scope
 \end_layout
 
 \begin_layout Enumerate
-Optionally, place a human readable description of the Attribute Certificate
- Scope in the 
+Optionally, place a human readable description of the Scope in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1260,23 +1264,21 @@ scope_description
 
 \begin_layout Enumerate
 Create a JWT containing a Claims Set with the above along with any additional
- claims relevant to the Attribute Certificate Scope.
+ claims relevant to the Scope.
 \end_layout
 
 \begin_layout Standard
-When validating a JWT Attribute Certificate, the following steps MUST be
- taken.
+When validating a JAC, the following steps MUST be taken.
  The order of the steps is not significant in cases where there are no dependenc
 ies between the inputs and outputs of the steps.
- If any of the listed steps fails then the JWT Attribute Certificate MUST
- be rejected for processing.
+ If any of the listed steps fails then the JAC MUST be rejected for processing.
 \end_layout
 
 \begin_layout Standard
-Note that the manner in which Attribute Certificates are presented to the
- validating party is outside the scope of this specification.
+Note that the manner in which JACs are presented to the validating party
+ is outside the scope of this specification.
  However, it is assumed that the Primary JWT is available to the party validatin
-g the Attribute Certificate.
+g the JAC.
 \end_layout
 
 \begin_layout Enumerate
@@ -1294,7 +1296,7 @@ I-D.ietf-oauth-json-web-token
 \end_layout
 
 \begin_layout Enumerate
-The Attribute Certificate MUST be a valid JWT, per 
+The JAC MUST be a valid JWT, per 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1356,13 +1358,13 @@ scope
 \begin_inset Quotes erd
 \end_inset
 
- claim of the Attribute Certificate MUST be unique amongst all Attribute
- Certificates presented with the Primary JWT.
+ claim of the JAC MUST be unique amongst all JACs presented with the Primary
+ JWT.
 \end_layout
 
 \begin_layout Enumerate
-To avoid ambiguity, the Attribute Certificate SHOULD NOT have any claims
- that are present in the Primary JWT, other than 
+To avoid ambiguity, the JAC SHOULD NOT have any claims that are present
+ in the Primary JWT, other than 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1422,8 +1424,7 @@ iss
 \begin_inset Quotes erd
 \end_inset
 
- claim of the Attribute Certificate is absent, or is present and matches
- the 
+ claim of the JAC is absent, or is present and matches the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1431,14 +1432,13 @@ iss
 \begin_inset Quotes erd
 \end_inset
 
- claim of the Primary JWT, the Attribute Certificate MUST be signed with
- a key that signed the Primary JWT; otherwise, the signer of the Attribute
- Certificate MUST be directly trusted (by configuration or otherwise).
+ claim of the Primary JWT, the JAC MUST be signed with a key that signed
+ the Primary JWT; otherwise, the signer of the JAC MUST be directly trusted
+ (by configuration or otherwise).
 \end_layout
 
 \begin_layout Enumerate
-The time for which the Attribute Certificate is being validated MUST be
- within the Attribute Certificate Validity.
+The time for which the JAC is being validated MUST be within the JAC Validity.
  If the evaluation time is equal to the time expressed by either of the
  
 \begin_inset Quotes eld
@@ -1456,7 +1456,7 @@ exp
 \begin_inset Quotes erd
 \end_inset
 
- claims, the Attribute Certificate is timely and this check succeeds.
+ claims, the JAC is timely and this check succeeds.
  Note that in some applications, the evaluation time MAY not be the same
  as the current time.
  (This language is based on 
@@ -1473,8 +1473,7 @@ RFC3281
 \end_layout
 
 \begin_layout Enumerate
-The Attribute Certificate Validity MUST match or be within the interval
- specified by the 
+The JAC Validity MUST match or be within the interval specified by the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1494,7 +1493,7 @@ exp
 \end_layout
 
 \begin_layout Enumerate
-If the Attribute Certificate contains an 
+If the JAC contains an 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1531,8 +1530,7 @@ Additional checks:
 \end_layout
 
 \begin_layout Enumerate
-The Attribute Certificate MAY be rejected on the basis of further validating
- party configuration.
+The JAC MAY be rejected on the basis of further validating party configuration.
 \end_layout
 
 \begin_layout Enumerate
@@ -1545,62 +1543,56 @@ Security Considerations
 \end_layout
 
 \begin_layout Standard
-Attribute Certificates must be valid JWTs and are subject to the same validation
- policy as the Primary JWT.
+JACs must be valid JWTs and are subject to the same validation policy as
+ the Primary JWT.
 \end_layout
 
 \begin_layout Standard
-Attribute Certificate issuers must protect their private keys.
+JAC issuers must protect their private keys.
 \end_layout
 
 \begin_layout Standard
-The binding between an Attribute Certificate and the Primary JWT cannot
- be stronger than the algorithm used to generate the Certificate Digest
- Information.
+The binding between a JAC and the Primary JWT cannot be stronger than the
+ algorithm used to generate the Certificate Digest Information.
 \end_layout
 
 \begin_layout Standard
-Claims Names that are present in both the Primary JWT and the Attribute
- Certificate (other than those explicitly permitted by this specification)
- SHOULD be rejected.
+Claims Names that are present in both the Primary JWT and the JAC (other
+ than those explicitly permitted by this specification) SHOULD be rejected.
 \end_layout
 
 \begin_layout Standard
-To avoid conflicts between identically named claims in different Attribute
- Certificates, the validating party SHOULD group Attribute Certificate claims
- by Scope when surfacing them to the application.
+To avoid conflicts between identically named claims in different JACs, the
+ validating party SHOULD group claims by Scope when surfacing them to the
+ application.
 \end_layout
 
 \begin_layout Standard
-If the issuer of an Attribute Certificate differs from the issuer of the
- Primary JWT, trust in any claims made by the Attribute Certificate is subject
- to local policy (for example, different issuers may only be trusted to
- issue Attribute Certificates for certain Scopes, and/or to issue certain
- claims).
- If no such policy exists, the Attribute Certificate MUST be ignored.
+If the issuer of an JAC differs from the issuer of the Primary JWT, trust
+ in any claims made by the JAC is subject to local policy (for example,
+ different issuers may only be trusted to issue JACs for certain Scopes,
+ and/or to issue certain claims).
+ If no such policy exists, the JAC MUST be ignored.
 \end_layout
 
 \begin_layout Standard
-User agents that permit selective disclosure of Attribute Certificates SHOULD
- provide a means for the user to determine what claims are being made by
- an Attribute Certificate, particularly in the cases where the Attribute
- Certificate is not issued by the issuer of the Primary JWT, and/or only
- the Scope Description is displayed by default.
+User agents that permit selective disclosure of JACs SHOULD provide a means
+ for the user to determine what claims are being made by a JAC, particularly
+ in the cases where the JAC is not issued by the issuer of the Primary JWT,
+ and/or only the Scope Description is displayed by default.
 \end_layout
 
 \begin_layout Standard
-The presentation of Attribute Certificates is not defined by this document.
- However, Attribute Certificates SHOULD be presented over a secure channel
- and, when used with Primary JWTs that contain a public key, SHOULD be secured
- by the corresponding private key so that the choice of Attribute Certificates
- is protected.
+The presentation of JACs is not defined by this document.
+ However, JACs SHOULD be presented over a secure channel and, when used
+ with Primary JWTs that contain a public key, SHOULD be secured by the correspon
+ding private key so that the choice of JACs is protected.
 \end_layout
 
 \begin_layout Standard
 This specification does not discuss revocation.
- It is assumed that the Attribute Certificate Validity will typically be
- less than the time required to issue and distribute revocation information
- (see 
+ It is assumed that the JAC Validity will typically be less than the time
+ required to issue and distribute revocation information (see 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1688,7 +1680,7 @@ scope
 \end_layout
 
 \begin_layout Itemize
-Claim Description: Attribute Certificate Scope
+Claim Description: JWT Attribute Certificate Scope
 \end_layout
 
 \begin_layout Itemize
@@ -1719,7 +1711,7 @@ scope_description
 \end_layout
 
 \begin_layout Itemize
-Claim Description: Attribute Certificate Scope Description
+Claim Description: JWT Attribute Certificate Scope Description
 \end_layout
 
 \begin_layout Itemize
@@ -1744,12 +1736,12 @@ name "sub:jac-digest-algs"
 
 \end_inset
 
-JWT Attribute Certificate Digest Algorithm Registry
+JAC Digest Algorithm Registry
 \end_layout
 
 \begin_layout Standard
-This section creates a registry of digest algorithms for binding an Attribute
- Certificate to its Primary JWT.
+This section creates a registry of digest algorithms for binding a JAC to
+ its Primary JWT.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1894,12 +1886,12 @@ name "sub:jac-scope-reg"
 
 \end_inset
 
-JWT Attribute Certificate Scope Registry
+JAC Scope Registry
 \end_layout
 
 \begin_layout Standard
 This section creates a registry of Scopes for grouping the set of claims
- in an Attribute Certificate.
+ in a JAC.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2299,7 +2291,7 @@ name "sec:BrowserID"
 
 \end_inset
 
-BrowserID Attribute Certificate Profile
+BrowserID JAC Profile
 \end_layout
 
 \begin_layout Standard
@@ -2317,26 +2309,24 @@ BrowserID
 
 \end_inset
 
- user agent (UA) may present a set of Attribute Certificates as a value
- of the 
+ user agent (UA) may present a set of JACs as a value of the 
 \begin_inset Quotes eld
 \end_inset
 
-attribute_certs
+jac
 \begin_inset Quotes erd
 \end_inset
 
  claim in an assertion (that is, an array of strings where each value is
- a JWT Attribute Certificate).
+ a JAC).
  This ensures that chosen set is authenticated by the user's private key.
- BrowserID Attribute Certificates MUST use the JWS Compact Serialization.
+ BrowserID JACs MUST use the JWS Compact Serialization.
 \end_layout
 
 \begin_layout Standard
 The Primary JWT is the certificate issued by the user's identity provider
  (IdP).
- The Attribute Certificate validating party is the BrowserID Relying Party
- (RP).
+ The JAC validating party is the BrowserID Relying Party (RP).
 \end_layout
 
 \begin_layout Standard
@@ -2352,9 +2342,9 @@ scope_description
 \end_layout
 
 \begin_layout Standard
-The UA SHOULD only present Attribute Certificates when the RP has indicated
- its desire for specific Scopes, and the user has explicitly authorized
- disclosure of the Attribute Certificates corresponding to those Scopes.
+The UA SHOULD only present JACs when the RP has indicated its desire for
+ specific Scopes, and the user has explicitly authorized disclosure of the
+ JACs corresponding to those Scopes.
 \end_layout
 
 \end_body
