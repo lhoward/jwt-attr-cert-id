@@ -282,7 +282,7 @@ JWT Attribute Certificate (JAC)
 status open
 
 \begin_layout Plain Layout
-draft-howard-jwt-attr-cert-00.txt
+draft-howard-jwt-attr-cert-01.txt
 \end_layout
 
 \end_inset
@@ -569,7 +569,7 @@ Attribute certificates (similar to those described in
 status collapsed
 
 \begin_layout Plain Layout
-RFC3281
+RFC5755
 \end_layout
 
 \end_inset
@@ -978,7 +978,7 @@ certificate
 status collapsed
 
 \begin_layout Plain Layout
-RFC3281
+RFC5755
 \end_layout
 
 \end_inset
@@ -1464,7 +1464,7 @@ exp
 status collapsed
 
 \begin_layout Plain Layout
-RFC3281
+RFC5755
 \end_layout
 
 \end_inset
@@ -1597,7 +1597,7 @@ This specification does not discuss revocation.
 status collapsed
 
 \begin_layout Plain Layout
-RFC3281
+RFC5755
 \end_layout
 
 \end_inset
@@ -2116,48 +2116,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset href
 LatexCommand href
-name "JWA"
-target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-algorithms.xml"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex BibXML
-status open
-
-\begin_layout Plain Layout
-\begin_inset CommandInset href
-LatexCommand href
 name "JWE"
 target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-encryption.xml"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex BibXML
-status open
-
-\begin_layout Plain Layout
-\begin_inset CommandInset href
-LatexCommand href
-name "JWK"
-target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-key.xml"
 
 \end_inset
 
@@ -2270,8 +2230,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset href
 LatexCommand href
-name "RFC3281"
-target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3281.xml"
+name "RFC5755"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5755.xml"
 
 \end_inset
 
