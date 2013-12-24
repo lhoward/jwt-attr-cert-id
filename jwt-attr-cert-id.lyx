@@ -1548,12 +1548,12 @@ JACs must be valid JWTs and are subject to the same validation policy as
 \end_layout
 
 \begin_layout Standard
-JAC issuers must protect their private keys.
+JAC issuers must protect their signing keys.
 \end_layout
 
 \begin_layout Standard
-The binding between a JAC and the Primary JWT cannot be stronger than the
- algorithm used to generate the Certificate Digest Information.
+The binding between a JAC and the Primary JWT is only as strong as the algorithm
+ used to generate the Certificate Digest Information.
 \end_layout
 
 \begin_layout Standard
@@ -1577,13 +1577,13 @@ If the issuer of an JAC differs from the issuer of the Primary JWT, trust
 
 \begin_layout Standard
 User agents that permit selective disclosure of JACs SHOULD provide a means
- for the user to determine what claims are being made by a JAC, particularly
+ for the user to determine the claims being made by a JAC, particularly
  in the cases where the JAC is not issued by the issuer of the Primary JWT,
- and/or only the Scope Description is displayed by default.
+ and/or only the Scope Description is by default displayed.
 \end_layout
 
 \begin_layout Standard
-The presentation of JACs is not defined by this document.
+This specification does not discuss the presentation of JACs.
  However, JACs SHOULD be presented over a secure channel and, when used
  with Primary JWTs that contain a public key, SHOULD be secured by the correspon
 ding private key so that the choice of JACs is protected.
