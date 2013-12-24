@@ -509,7 +509,7 @@ lukeh@padl.com
 
 \begin_layout Abstract
 A JSON Web Token Attribute Certificate (JAC) contains additional claims,
- grouped by scope, to be presented alongside a primary JWT.
+ grouped by scope, to be presented alongside a primary JSON Web Token.
 \end_layout
 
 \begin_layout Standard
@@ -532,7 +532,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-JSON Web Tokens 
+JSON Web Tokens (JWTs, defined in 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -542,7 +542,7 @@ I-D.ietf-oauth-json-web-token
 
 \end_inset
 
- may be used to convey certified claims about a subject.
+) may be used to convey certified claims about a subject.
  For example, the 
 \begin_inset Flex EntityXRef
 status collapsed
@@ -580,8 +580,8 @@ RFC5755
 \end_layout
 
 \begin_layout Standard
-This document defines protocols, procedures and conventions for using a
- JWT as an attribute certificate.
+This document defines procedures and conventions for using a JWT as an attribute
+ certificate.
 \end_layout
 
 \begin_layout Section
@@ -1275,8 +1275,8 @@ ies between the inputs and outputs of the steps.
 \end_layout
 
 \begin_layout Standard
-Note that the manner in which JACs are presented to the validating party
- is outside the scope of this specification.
+Note that the manner in which JACs are presented to the relying party is
+ outside the scope of this specification.
  However, it is assumed that the Primary JWT is available to the party validatin
 g the JAC.
 \end_layout
@@ -1501,9 +1501,9 @@ aud
 \begin_inset Quotes erd
 \end_inset
 
- claim, and the validating party would normally process this claim in a
- Primary JWT, then the validating party MUST identify itself with one of
- its values (per 
+ claim, and the relying party would normally process this claim in a Primary
+ JWT, then the relying party MUST identify itself with one of its values
+ (per 
 \begin_inset Flex EntityXRef
 status collapsed
 
@@ -1530,11 +1530,11 @@ Additional checks:
 \end_layout
 
 \begin_layout Enumerate
-The JAC MAY be rejected on the basis of further validating party configuration.
+The JAC MAY be rejected on the basis of further relying party configuration.
 \end_layout
 
 \begin_layout Enumerate
-The validating party MAY filter the attributes returned to the application
+The relying party MAY filter the attributes returned to the application
  on the basis of configuration information.
 \end_layout
 
@@ -1563,8 +1563,8 @@ Claims Names that are present in both the Primary JWT and the JAC (other
 
 \begin_layout Standard
 To avoid conflicts between identically named claims in different JACs, the
- validating party SHOULD group claims by Scope when surfacing them to the
- application.
+ relying party SHOULD group claims by Scope when surfacing them to the applicati
+on.
 \end_layout
 
 \begin_layout Standard
@@ -2286,7 +2286,6 @@ jac
 \begin_layout Standard
 The Primary JWT is the certificate issued by the user's identity provider
  (IdP).
- The JAC validating party is the BrowserID Relying Party (RP).
  The RP MAY provide the UA with a set of Scopes it desires in order to authorize
  the user; these should be divided into Essential Scopes (those which it
  deems necessary to authorize the user) and Voluntary Scopes (those which
