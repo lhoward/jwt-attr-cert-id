@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc tocindent="no"?>
+<?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc tocindent="no"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY JWA PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-algorithms.xml">
+<!ENTITY JWE PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-encryption.xml">
+<!ENTITY JWK PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-key.xml">
+<!ENTITY JWS PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-jose-json-web-signature.xml">
+<!ENTITY JWT PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-json-web-token.xml">
+<!ENTITY RFC3281 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3281.xml">
+]>
+<rfc docName="draft-howard-jwt-attr-cert-00.txt" ipr="trust200902" category="exp" updates="">
+  <front>
+    <title abbrev="JWT Attribute Certificate (JAC)">JWT Attribute Certificate (JAC)</title>
+    <author initials="L." surname="Howard" fullname="Luke Howard">
+      <organization abbrev="PADL">PADL Software</organization>
+      <address>
+        <postal>
+          <street>PO Box 59</street>
+          <city>Central Park</city>
+          <region>VIC</region>
+          <code>3145</code>
+          <country>Australia</country>
+        </postal>
+        <email>lukeh@padl.com</email>
+      </address>
+    </author>
+    <date month="December" year="2013"/>
+    <area>
+Security Area
+</area>
+    <keyword>Internet-Draft</keyword>
+    <abstract>
+      <t>
+A JSON Web Token Attribute Certificate (JAC) contains additional claims, grouped by scope, to be presented alongside a primary JWT.</t>
+    </abstract>
+  </front>
+  <middle>
+    <section title="Introduction" anchor="sec_Introduction">
+      <t>
+JSON Web Tokens <xref target="I-D.ietf-oauth-json-web-token"/> may be used to convey certified claims about a subject. For example, the <xref target="BrowserID"/> protocol uses a JWT containing an e-mail address and public key to bind an identity to a signing key. JWTs may include a variety of claims, however doing so in a single token has some disadvantages. First, all claims must be issued by the same entity (or the issuer must contact other authorities). Secondly, they must share the same validity period. Finally, the disclosing party must either reveal all claims or none.</t>
+      <t>
+Attribute certificates (similar to those described in <xref target="RFC3281"/>) allow additional claims, grouped by scope, to be disclosed separately. A special claim is used to bind the attribute certificate to the primary JWT with which it is associated.</t>
+      <t>
+This document defines protocols, procedures and conventions for using a JWT as an attribute certificate.</t>
+    </section>
+    <section title="Requirements notation" anchor="d1e374">
+      <t>
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+      <t>
+The reader is assumed to be familiar with the terms used in the base JWT specifications.</t>
+    </section>
+    <section title="Terminology" anchor="sec_Terminology">
+      <t>
+        <list style="hanging">
+          <t hangText="Certificate Digest Information">
+ a claim binding a JAC to its Primary JWT</t>
+          <t hangText="Claims">
+ individual properties in a JAC or other JWT</t>
+          <t hangText="JAC Validity">
+ the time interval in which the JAC is valid, as expressed by the “nbf” (<xref target="I-D.ietf-oauth-json-web-token"/> Section 4.1.5) and “exp” (<xref target="I-D.ietf-oauth-json-web-token"/> Section 4.1.4) claims</t>
+          <t hangText="JWT Attribute Certificate (JAC)">
+ a JWT associated with a Primary JWT that containing additional claims about a subject</t>
+          <t hangText="JSON Web Token (JWT)">
+ a signed or encrypted structure for representing a set of Claims to be transferred between two parties</t>
+          <t hangText="Primary JWT">
+ a JWT certifying an identity and typically containing a public key</t>
+          <t hangText="Scope">
+ a string that identifies the set of claims in a JAC</t>
+          <t hangText="Scope Description">
+ a human readable description of the Scope suitable for displaying by a user agent</t>
+        </list>
+      </t>
+    </section>
+    <section title="JWT Attribute Certificate (JAC) Overview" anchor="sec_jac_overview">
+      <t>
+A JWT Attribute Certificate is a JSON Web Token (per <xref target="I-D.ietf-oauth-json-web-token"/> Section 3) that contains the mandatory claims defined in  <xref target="sec_jac_claims"/> and is associated with another JWT (the Primary JWT).</t>
+      <section title="Example JAC" anchor="d1e474">
+        <t>
+The following is an example of a JAC Claims Set containing a end-user's profile claims:</t>
+        <t>
+</t>
+        <t>
+          <figure suppress-title="true" align="center">
+            <artwork>{
+  "scope": "profile",
+  "scope_description": "My standard profile",
+  "cdi": {
+    "alg": "S256",
+    "dig": "fHf5HxJuzWTSuepVY3N0BvWlvuXPNiUHwqsk0HX1Cjc"
+  },
+  "iss": "ca.example.com",
+  "name": "Luke Howard",
+  "given_name": "Luke",
+  "family_name": "Howard",
+  "website": "www.example.com/~lukeh",
+  "preferred_username": "lukeh"
+}</artwork>
+          </figure>
+        </t>
+        <t>
+The Claims Set is signed (in this case, by a key belonging to “ca.example.com”) and encoded as a JWT; this encoding is the JAC.</t>
+      </section>
+    </section>
+    <section title="JAC Claims" anchor="sec_jac_claims">
+      <t>
+The following Claim Names are defined for use in JACs. JACs MAY contain other claims. Claims present in the Primary JWT, with the exception of “iss”, “aud”, “exp”, “nbf”, “iat” and “jti”, SHOULD NOT be present in a JAC.</t>
+      <section title="“cdi” (Certificate Digest Information)" anchor="sub_cbi_claim">
+        <t>
+The “cdi” claim binds a JAC to its Primary JWT. Its value is a JSON object containing the name/value pairs (sub-claims) defined below. Use of this claim is REQUIRED.</t>
+        <t>
+(Note that the term “certificate” is used for consistency with <xref target="RFC3281"/>; however there is no explicit requirement that the Primary JWT contain a public key or otherwise function as a certificate.)</t>
+        <section title="“alg” (Digest Algorithm)" anchor="sub_alg_subclaim">
+          <t>
+This sub-claim contains a string identifying the digest algorithm used to create a digest of the Primary JWT. Algorithms are defined in  <xref target="sub_jac_digest_algs"/> of this document.</t>
+        </section>
+        <section title="“dig” (Digest Value)" anchor="sub_dig_subclaim">
+          <t>
+This sub-claim contains the digest of the JWS (per <xref target="I-D.ietf-jose-json-web-signature"/>) or JWE (per <xref target="I-D.ietf-jose-json-web-encryption"/>) Compact Serialization of the Primary JWT. The digest algorithm is the one specified by the “alg” sub-claim. The digest is encoded as a base 64 URL string.</t>
+          <t>
+In the case where the Primary JWT has a JWS JSON Serialization and has multiple signatures, the first signature is used when constructing the JWS Compact Serialization for input to the digest algorithm.</t>
+        </section>
+      </section>
+      <section title="“scope” (Scope)" anchor="sub_scope_claim">
+        <t>
+The “scope” claim is a case-sensitive string identifying the set of claims contained in the JAC. Use of this claim is REQUIRED.</t>
+        <t>
+In order to prevent collisions, Scopes SHOULD either be registered in the IANA JAC Scopes registry defined in  <xref target="sub_jac_scope_reg"/>, or be a Collision-Resistant Name (per <xref target="I-D.ietf-oauth-json-web-token"/> Section 2). A producer and consumer of a JAC MAY agree to use Scopes that are not registered or Collision-Resistant, but this is discouraged owing to the possibility of collision.</t>
+        <t>
+Where the subject of the Primary JWT is an end-user, support for the scopes defined in <xref target="OpenID.Core"/> Section 5.4 is RECOMMENDED.</t>
+      </section>
+      <section title="“scope_description” (Scope Description)" anchor="sub_scope_description_claim">
+        <t>
+The “scope_description” claim is a string suitable for displaying to an end-user that describes the set of claims contained in the JAC. Use of this claim is OPTIONAL.</t>
+      </section>
+    </section>
+    <section title="Rules for Creating and Validating a JAC" anchor="sec_jac_validation">
+      <t>
+To create a JAC, one MUST perform these steps. The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.</t>
+      <t>
+        <list style="numbers">
+          <t>
+Choose a digest algorithm to be used in creating a digest of the Primary JWT. Place the corresponding Algorithm Name in the “alg” sub-claim of the “cdi” claim.</t>
+          <t>
+Create a digest of the Primary JWT and place it in the “dig” sub-claim of the “cdi” claim.</t>
+          <t>
+Place the Scope in the “scope” claim.</t>
+          <t>
+Optionally, place a human readable description of the Scope in the “scope_description” claim.</t>
+          <t>
+Create a JWT containing a Claims Set with the above along with any additional claims relevant to the Scope.</t>
+        </list>
+      </t>
+      <t>
+When validating a JAC, the following steps MUST be taken. The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps. If any of the listed steps fails then the JAC MUST be rejected for processing.</t>
+      <t>
+Note that the manner in which JACs are presented to the validating party is outside the scope of this specification. However, it is assumed that the Primary JWT is available to the party validating the JAC.</t>
+      <t>
+        <list style="numbers">
+          <t>
+The Primary JWT MUST be a valid JWT, per <xref target="I-D.ietf-oauth-json-web-token"/> Section 7.</t>
+          <t>
+The JAC MUST be a valid JWT, per <xref target="I-D.ietf-oauth-json-web-token"/> Section 7.</t>
+          <t>
+The algorithm in the “alg” sub-claim of the “cdi” claim MUST be a supported algorithm.</t>
+          <t>
+The digest in the “dig” sub-claim of the “cdi” claim MUST match the digest of the Primary JWT using the selected algorithm.</t>
+          <t>
+The “scope” claim of the JAC MUST be unique amongst all JACs presented with the Primary JWT.</t>
+          <t>
+To avoid ambiguity, the JAC SHOULD NOT have any claims that are present in the Primary JWT, other than “iss”, “aud”, “exp”, “nbf”, “iat” and “jti”.</t>
+          <t>
+If the “iss” claim of the JAC is absent, or is present and matches the “iss” claim of the Primary JWT, the JAC MUST be signed with a key that signed the Primary JWT; otherwise, the signer of the JAC MUST be directly trusted (by configuration or otherwise).</t>
+          <t>
+The time for which the JAC is being validated MUST be within the JAC Validity. If the evaluation time is equal to the time expressed by either of the “nbf” or “exp” claims, the JAC is timely and this check succeeds. Note that in some applications, the evaluation time MAY not be the same as the current time. (This language is based on <xref target="RFC3281"/> Section 5.)</t>
+          <t>
+The JAC Validity MUST match or be within the interval specified by the “nbf” and “exp” claims of the Primary JWT, if present.</t>
+          <t>
+If the JAC contains an “aud” claim, and the validating party would normally process this claim in a Primary JWT, then the validating party MUST identify itself with one of its values (per <xref target="I-D.ietf-oauth-json-web-token"/> Section 4.1.3). This claim has the effect of restricting any values of the “aud” claim in the primary JWT.</t>
+        </list>
+      </t>
+      <t>
+Additional checks:</t>
+      <t>
+        <list style="numbers">
+          <t>
+The JAC MAY be rejected on the basis of further validating party configuration.</t>
+          <t>
+The validating party MAY filter the attributes returned to the application on the basis of configuration information.</t>
+        </list>
+      </t>
+    </section>
+    <section title="Security Considerations" anchor="d1e707">
+      <t>
+JACs must be valid JWTs and are subject to the same validation policy as the Primary JWT.</t>
+      <t>
+JAC issuers must protect their private keys.</t>
+      <t>
+The binding between a JAC and the Primary JWT cannot be stronger than the algorithm used to generate the Certificate Digest Information.</t>
+      <t>
+Claims Names that are present in both the Primary JWT and the JAC (other than those explicitly permitted by this specification) SHOULD be rejected.</t>
+      <t>
+To avoid conflicts between identically named claims in different JACs, the validating party SHOULD group claims by Scope when surfacing them to the application.</t>
+      <t>
+If the issuer of an JAC differs from the issuer of the Primary JWT, trust in any claims made by the JAC is subject to local policy (for example, different issuers may only be trusted to issue JACs for certain Scopes, and/or to issue certain claims). If no such policy exists, the JAC MUST be ignored.</t>
+      <t>
+User agents that permit selective disclosure of JACs SHOULD provide a means for the user to determine what claims are being made by a JAC, particularly in the cases where the JAC is not issued by the issuer of the Primary JWT, and/or only the Scope Description is displayed by default.</t>
+      <t>
+The presentation of JACs is not defined by this document. However, JACs SHOULD be presented over a secure channel and, when used with Primary JWTs that contain a public key, SHOULD be secured by the corresponding private key so that the choice of JACs is protected.</t>
+      <t>
+This specification does not discuss revocation. It is assumed that the JAC Validity will typically be less than the time required to issue and distribute revocation information (see <xref target="RFC3281"/> Section 6). If revocation is required, it SHOULD be discussed when profiling this specification for a particular application or protocol.</t>
+    </section>
+    <section title="IANA Considerations" anchor="d1e747">
+      <section title="JSON Web Token Claims Registry" anchor="sub_jac_claims_reg">
+        <t>
+The following Claim Names are registered in the IANA JSON Web Token Claims registry created in <xref target="I-D.ietf-oauth-json-web-token"/> Section 10.1.</t>
+        <t>
+          <list style="symbols">
+            <t>
+Claim Name: “cdi”</t>
+            <t>
+Claim Description: Certificate Digest Information</t>
+            <t>
+Change Controller: IESG</t>
+            <t>
+Specification Document(s):  <xref target="sub_cbi_claim"/> of [[ this document ]]</t>
+            <t>
+Claim Name: “scope”</t>
+            <t>
+Claim Description: JWT Attribute Certificate Scope</t>
+            <t>
+Change Controller: IESG</t>
+            <t>
+Specification Document(s):  <xref target="sub_scope_claim"/> of [[ this document ]]</t>
+            <t>
+Claim Name: “scope_description”</t>
+            <t>
+Claim Description: JWT Attribute Certificate Scope Description</t>
+            <t>
+Change Controller: IESG</t>
+            <t>
+Specification Document(s):  <xref target="sub_scope_description_claim"/> of [[ this document ]]</t>
+          </list>
+        </t>
+      </section>
+      <section title="JAC Digest Algorithm Registry" anchor="sub_jac_digest_algs">
+        <t>
+This section creates a registry of digest algorithms for binding a JAC to its Primary JWT.</t>
+        <section title="Registration Template" anchor="d1e828">
+          <t>
+            <list style="hanging">
+              <t hangText="Algorithm Name:">
+ A string identifying the digest algorithm. It is RECOMMENDED that the name be short -- not to exceed 8 characters without a compelling reason to do so. This name is case-sensitive.</t>
+              <t hangText="Algorithm Description:">
+ Brief description of the digest algorithm.</t>
+              <t hangText="Implementation Requirements:">
+ The algorithm implementation requirements, which must be one the words Required, Recommended, Optional, Deprecated, or Prohibited.</t>
+              <t hangText="Change Controller:">
+ For Standards Track RFCs, state "IESG". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.</t>
+              <t hangText="Specification Document(s):">
+ Reference to the document(s) that specify the algorithm, preferably including URI(s) that can be used to retrieve copies of the document(s). An indication of the relevant sections may also be included but is not required. </t>
+            </list>
+          </t>
+        </section>
+        <section title="Initial Registry Contents" anchor="d1e860">
+          <t>
+            <list style="symbols">
+              <t>
+Algorithm Name: “S256”</t>
+              <t>
+Algorithm Description: SHA-256 hash</t>
+              <t>
+Implementation Requirements: Required</t>
+              <t>
+Change Controller: IESG</t>
+              <t>
+Specification Document(s): Section 6.2 of <xref target="SHS"/>
+</t>
+              <t>
+Algorithm Name: “S512”</t>
+              <t>
+Algorithm Description: SHA-512 hash</t>
+              <t>
+Implementation Requirements: Optional</t>
+              <t>
+Change Controller: IESG</t>
+              <t>
+Specification Document(s): Section 6.4 of <xref target="SHS"/>
+</t>
+            </list>
+          </t>
+        </section>
+      </section>
+      <section title="JAC Scope Registry" anchor="sub_jac_scope_reg">
+        <t>
+This section creates a registry of Scopes for grouping the set of claims in a JAC.</t>
+        <section title="Registration Template" anchor="d1e919">
+          <t>
+            <list style="hanging">
+              <t hangText="Scope Name:">
+ A string identifying the Scope.</t>
+              <t hangText="Scope Description:">
+ Brief description of the Scope. The description MAY include the Claim Names.</t>
+              <t hangText="Change Controller:">
+ For Standards Track RFCs, state "IESG". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.</t>
+              <t hangText="Specification Document(s):">
+ Reference to the document(s) that specify the algorithm, preferably including URI(s) that can be used to retrieve copies of the document(s). An indication of the relevant sections may also be included but is not required.</t>
+            </list>
+          </t>
+        </section>
+        <section title="Initial Registry Contents" anchor="d1e946">
+          <t>
+            <list style="symbols">
+              <t>
+Scope Name: “profile”</t>
+              <t>
+Scope Description: The End-User's default profile claims, which are name, family_name, given_name, middle_name, nickname, preferred_username, profile, picture, website, gender, birthdate, zoneinfo, locale, and updated_at.</t>
+              <t>
+Change Controller: The OpenID Foundation</t>
+              <t>
+Specification Document(s): Section 5.4 of <xref target="OpenID.Core"/>
+</t>
+              <t>
+Scope Name: “email”</t>
+              <t>
+Scope Description: The email and email_verified claims</t>
+              <t>
+Change Controller: The OpenID Foundation</t>
+              <t>
+Specification Document(s): Section 5.4 of <xref target="OpenID.Core"/>
+</t>
+              <t>
+Scope Name: “address”</t>
+              <t>
+Scope Description: The address claim</t>
+              <t>
+Change Controller: The OpenID Foundation</t>
+              <t>
+Specification Document(s): Section 5.4 of <xref target="OpenID.Core"/>
+</t>
+              <t>
+Scope Name: “phone”</t>
+              <t>
+Scope Description: The phone_number and phone_number_verified claims</t>
+              <t>
+Change Controller: The OpenID Foundation</t>
+              <t>
+Specification Document(s): Section 5.4 of <xref target="OpenID.Core"/>
+</t>
+            </list>
+          </t>
+        </section>
+      </section>
+    </section>
+  </middle>
+  <back>
+    <references title="Normative References">&RFC2119;
+&JWA;
+&JWE;
+&JWK;
+&JWS;
+&JWT;
+
+<reference anchor="OpenID.Core"><front><title>OpenID Connect Basic Client Implementer's Guide</title><author initials="M." surname="Jones" fullname="Mike Jones"><organization>The OpenID Foundation</organization></author><date year="2013" month="December"/></front><format type="HTML" target="http://openid.net/specs/openid-connect-core-1_0.html"/></reference>
+<reference anchor="SHS"><front><title abbrev="FIPS PUB 180-4">Secure Hash Standard (SHS)</title><organization>National Institute of Standards and Technology</organization><date year="2012" month="March"/></front><seriesInfo name="FIPS" value="PUB 180-4"/></reference>
+</references>
+    <references title="Informative References">&RFC3281;<reference anchor="BrowserID"><front><title>BrowserID Specification</title><author initials="B." surname="Adida" fullname="Ben Adida"><organization>The Mozilla Foundation</organization></author><date year="2013" day="26" month="February"/></front><format type="TXT" target="https://raw.github.com/mozilla/id-specs/prod/browserid/index.md"/></reference></references>
+    <section title="BrowserID JAC Profile" anchor="sec_BrowserID">
+      <t>
+This section is non-normative.</t>
+      <t>
+A <xref target="BrowserID"/> user agent (UA) may present a set of JACs as a value of the “jac” claim in an assertion (that is, an array of strings where each value is a JAC). This ensures that chosen set is authenticated by the user's private key. BrowserID JACs MUST use the JWS Compact Serialization.</t>
+      <t>
+The Primary JWT is the certificate issued by the user's identity provider (IdP). The JAC validating party is the BrowserID Relying Party (RP). The RP MAY provide the UA with a set of Scopes it desires in order to authorize the user; these should be divided into Essential Scopes (those which it deems necessary to authorize the user) and Voluntary Scopes (those which it deems useful but not necessary). (This language is consistent with <xref target="OpenID.Core"/>.)</t>
+      <t>
+The IdP SHOULD localize the “scope_description” claim according to the UA locale.</t>
+      <t>
+The UA SHOULD only present JACs when the RP has indicated its desire for specific Scopes, and the user has explicitly authorized disclosure of the JACs corresponding to those Scopes. The RP SHOULD deal gracefully with a user who refuses to disclose Essential Scopes, for example by providing limited authorization rather than rejecting the request entirely.</t>
+    </section>
+  </back>
+</rfc>
